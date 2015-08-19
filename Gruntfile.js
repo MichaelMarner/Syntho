@@ -54,9 +54,17 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            build: {
-                files: ['src/**'],
-                tasks: ['build'],
+            styles: {
+                files: ['src/**/*.scss'],
+                tasks: ['sass'],
+            },
+            scripts: {
+                files: ['src/**/*.coffee'],
+                tasks: ['coffee', 'uglify'],
+            },
+            copy: {
+                files: ['!src/**/*.scss', '!src/**/*.coffee'],
+                tasks: ['copy'],
             }
         },
         connect: {
