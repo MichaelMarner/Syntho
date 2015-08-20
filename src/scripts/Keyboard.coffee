@@ -18,15 +18,15 @@ class @KeyboardInput
 
     # Handler for a keydown event
     keydown: (event) ->
-        #console.log(event.keyCode)
         note = @getNoteFromKeyCode(event.keyCode)
         @scanner[note ] = 1 if note >=0
-        console.log(@getActiveNote())
+        PubSub.publish('Keyboard', @getActiveNote()) if  note >= 0;
 
     # Handler for a keyup event
     keyup: (event) ->
         note = @getNoteFromKeyCode(event.keyCode)
         @scanner[note] = 0 if note >=0
+        PubSub.publish('Keyboard', @getActiveNote()) if  note >= 0;
 
     isKeyDown: ->
         return @getActiveNote() >= 0

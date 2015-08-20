@@ -25,4 +25,5 @@ class @FrequencyMap
         @octave = 0;
 
     getFrequency: (note) ->
+        console.log(note)
         return @map[@octave][note] if note >=0 && note <= 12
