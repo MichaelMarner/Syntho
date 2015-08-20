@@ -11,7 +11,7 @@ vco1.frequency.value = 440
 vco1.start()
 
 vco2 = audioContext.createOscillator()
-vco2.type = 'sawtooth'
+vco2.type = 'square'
 vco2.frequency.value = 440
 vco2.detune.value = 30
 vco2.start()
