@@ -23,7 +23,7 @@ freqMap = new FrequencyMap
 
 callback = (message, note) ->
     if note >= 0 
-        vco1.frequency.value = freqMap.getFrequency(note)
+        vco1.frequency.setValueAtTime(freqMap.getFrequency(note), audioContext.currentTime)
         gate.gain.value = 1
     else
         gate.gain.value = 0
