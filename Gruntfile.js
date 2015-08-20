@@ -60,7 +60,7 @@ module.exports = function(grunt) {
             },
             scripts: {
                 files: ['src/**/*.coffee'],
-                tasks: ['coffee', 'uglify'],
+                tasks: ['build'],
             },
             copy: {
                 files: ['!src/**/*.scss', '!src/**/*.coffee'],
