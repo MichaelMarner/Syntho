@@ -14,7 +14,16 @@ class @KeyboardInput
         $(document).keydown -> self.keydown(event)
         $(document).keyup   -> self.keyup(event)
         @scanner = [0,0,0,0,0,0,0,0,0,0,0,0]
+        @lowPriority = false
     
+
+    setKeyPriority: (priority) ->
+        if (priority == "high")
+            @lowPriority = false
+        else if (priority == "low")
+            @lowPriority = true
+        else
+            throw "Invalid key priority"
 
     # Handler for a keydown event
     keydown: (event) ->
@@ -34,9 +43,15 @@ class @KeyboardInput
 
     # Gets the active note that should be playing, low note priority.
     getActiveNote: ->
-        for scan, i in @scanner
-            if scan == 1
-                return i
+        if (@lowPriority)
+            for scan, i in @scanner
+                if scan == 1
+                    return i
+        else
+            for scan, i in @scanner.slice(0).reverse()
+                if scan == 1
+                    return 12-i
+
         return -1
 
     # Converts a note from a keyboard (US layout) to a note in the octave
