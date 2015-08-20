@@ -28,6 +28,9 @@ class @KeyboardInput
         note = @getNoteFromKeyCode(event.keyCode)
         @scanner[note] = 0 if note >=0
 
+    isKeyDown: ->
+        return @getActiveNote() >= 0
+
 
     # Gets the active note that should be playing, low note priority.
     getActiveNote: ->
