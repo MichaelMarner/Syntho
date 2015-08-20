@@ -3,10 +3,20 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        cssmin: {
+            target: {
+                files: {
+                    'build/application.css': ['build/**/*.css']
+                }
+            }
+        },
         bower_concat: {
             all: {
                 dest: 'build/bower.js',
                 cssDest: 'build/bower.css',
+                mainFiles: {
+                    bootstrap: [ 'dist/css/bootstrap.min.css', 'dist/js/bootstrap.min.js' ]
+                }
             },
         },
             
@@ -56,14 +66,14 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['src/**/*.scss'],
-                tasks: ['sass'],
+                tasks: ['sass','cssmin'],
             },
             scripts: {
                 files: ['src/**/*.coffee'],
                 tasks: ['build'],
             },
             copy: {
-                files: ['!src/**/*.scss', '!src/**/*.coffee'],
+                files: ['src/**', '!src/**/*.scss', '!src/**/*.coffee'],
                 tasks: ['copy'],
             }
         },
@@ -80,7 +90,7 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'build',
         'Compile all the things',
-        ['clean','copy','bower_concat','sass','coffee', 'uglify']
+        ['clean','copy','bower_concat','sass','cssmin','coffee', 'uglify']
     );
     grunt.registerTask(
         'serve',
@@ -97,6 +107,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-bower-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 
 };
