@@ -6,12 +6,12 @@
 audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 vco1 = audioContext.createOscillator()
-vco1.type = 'saw'
+vco1.type = 'square'
 vco1.frequency.value = 440
 vco1.start()
 
 gate = audioContext.createGain()
-gate.gain.value = 1
+gate.gain.value = 0
 
 vco1.connect(gate)
 gate.connect(audioContext.destination)
@@ -22,7 +22,10 @@ freqMap = new FrequencyMap
 
 
 callback = (message, note) ->
-    console.log("frequency");
-    vco1.frequency.value = freqMap.getFrequency(note)
+    if note >= 0 
+        vco1.frequency.value = freqMap.getFrequency(note)
+        gate.gain.value = 1
+    else
+        gate.gain.value = 0
 
 PubSub.subscribe('Keyboard', callback)

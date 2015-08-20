@@ -19,14 +19,14 @@ class @KeyboardInput
     # Handler for a keydown event
     keydown: (event) ->
         note = @getNoteFromKeyCode(event.keyCode)
-        @scanner[note ] = 1 if note >=0
-        PubSub.publish('Keyboard', @getActiveNote()) if  note >= 0;
+        @scanner[note ] = if note >= 0 then 1
+        PubSub.publish('Keyboard', @getActiveNote());
 
     # Handler for a keyup event
     keyup: (event) ->
         note = @getNoteFromKeyCode(event.keyCode)
-        @scanner[note] = 0 if note >=0
-        PubSub.publish('Keyboard', @getActiveNote()) if  note >= 0;
+        @scanner[note] = if note >= 0 then 0 
+        PubSub.publish('Keyboard', @getActiveNote());
 
     isKeyDown: ->
         return @getActiveNote() >= 0
