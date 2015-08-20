@@ -9,8 +9,6 @@ class @FrequencyMap
 
     constructor: ->
         @map = [ ]
-
-        @octave = 2;
         @map.push(@generateOctave(4))
         @map.push(@generateOctave(16))
         @map.push(@generateOctave(40))
@@ -18,8 +16,8 @@ class @FrequencyMap
         @map.push(@generateOctave(64))
         @map.push(@generateOctave(76))
 
-    getFrequency: (note) ->
-        return @map[@octave][note] if note >=0 && note <= 12
+    getFrequency: (octave, note) ->
+        return @map[octave][note] if note >=0 && note <= 12
 
 
     generateOctave: (startingNote) ->
