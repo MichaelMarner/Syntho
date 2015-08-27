@@ -10,6 +10,10 @@ class @Syntho
         @vco1.frequency.value = 440
         @vco1.start()
         @vco1.octave = 1
+        @vco1.amp = @audioContext.createGain()
+        @vco1.amp.gain.value = 1
+        @vco1.connect(@vco1.amp)
+
         
         @vco2 = @audioContext.createOscillator()
         @vco2.type = 'square'
@@ -17,6 +21,19 @@ class @Syntho
         @vco2.detune.value = 50 
         @vco2.start()
         @vco2.octave = 2
+        @vco2.amp = @audioContext.createGain()
+        @vco2.amp.gain.value = 1
+        @vco2.connect(@vco2.amp)
+
+        @vco3 = @audioContext.createOscillator()
+        @vco3.type = 'square'
+        @vco3.frequency.value = 440
+        @vco3.detune.value = 50 
+        @vco3.start()
+        @vco3.octave = 2
+        @vco3.amp = @audioContext.createGain()
+        @vco3.amp.gain.value = 1
+        @vco3.connect(@vco3.amp)
         
         @gate = @audioContext.createGain()
         @gate.gain.value = 0
@@ -25,27 +42,12 @@ class @Syntho
         @filter = @audioContext.createBiquadFilter()
         @filter.type = 'lowpass'
         @filter.frequency = 400
-        @filter.Q.value = 20
+        @filter.Q.value = 0
         
-        @vco1.connect(@filter)
-        @vco2.connect(@filter)
+        @vco1.amp.connect(@filter)
+        @vco2.amp.connect(@filter)
+        @vco3.amp.connect(@filter)
         @filter.connect(@gate)
         @gate.connect(@audioContext.destination)
 
 
-audioContext = new (window.AudioContext || window.webkitAudioContext)();
-syntho = new Syntho(audioContext)
-kbd = new KeyboardInput
-freqMap = new FrequencyMap
-
-
-# connect the physical keyboard to the VCOs
-callback = (message, note) ->
-    if note >= 0 
-        syntho.vco1.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco1.octave, note), audioContext.currentTime)
-        syntho.vco2.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco2.octave, note), audioContext.currentTime)
-        syntho.gate.gain.value = 1
-    else
-        syntho.gate.gain.value = 0
-
-PubSub.subscribe('Keyboard', callback)
