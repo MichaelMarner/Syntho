@@ -28,9 +28,9 @@ class @Syntho
         @vco3 = @audioContext.createOscillator()
         @vco3.type = 'square'
         @vco3.frequency.value = 440
-        @vco3.detune.value = 50 
+        @vco3.detune.value = 0 
         @vco3.start()
-        @vco3.octave = 2
+        @vco3.octave = 3
         @vco3.amp = @audioContext.createGain()
         @vco3.amp.gain.value = 1
         @vco3.connect(@vco3.amp)

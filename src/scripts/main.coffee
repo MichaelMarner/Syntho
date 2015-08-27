@@ -11,6 +11,7 @@ $( ->
         if note >= 0 
             syntho.vco1.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco1.octave, note), audioContext.currentTime)
             syntho.vco2.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco2.octave, note), audioContext.currentTime)
+            syntho.vco3.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco3.octave, note), audioContext.currentTime)
             syntho.gate.gain.value = 1
         else
             syntho.gate.gain.value = 0
