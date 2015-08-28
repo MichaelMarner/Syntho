@@ -2,9 +2,15 @@
 class @SynthUI
     constructor: (@syntho) ->
         #$( -> $(".dial").knob(); );
+        @.setupOctaves()
+        @.setupTuning()
+        @.setupVCOVolumes()
+        @.setupFilter()
 
+
+
+    setupOctaves: ->
         self = @
-
         # VCO Types
         $("input[name=vco1-type]").change ->
             value = $("input[name=vco1-type]:checked").val()
@@ -33,7 +39,9 @@ class @SynthUI
             'change' : (v) -> vco3OctaveChange(v)
         })
 
-        # Detune
+
+    setupTuning: ->
+        self = @
         vco1Detune = (value) -> self.syntho.vco1.detune.value = Math.round(value) 
         vco2Detune = (value) -> self.syntho.vco2.detune.value = Math.round(value) 
         vco3Detune = (value) -> self.syntho.vco3.detune.value = Math.round(value) 
@@ -48,8 +56,8 @@ class @SynthUI
             'change' : (v) -> vco3Detune(v)
         })
 
-
-        # VCO volumes
+    setupVCOVolumes: ->
+        self = @
         vco1Volume = (value) -> self.syntho.vco1.amp.gain.value = value / 100.0
         vco2Volume = (value) -> self.syntho.vco2.amp.gain.value = value / 100.0
         vco3Volume = (value) -> self.syntho.vco3.amp.gain.value = value / 100.0
@@ -63,4 +71,16 @@ class @SynthUI
         $("#vco3-vol").knob({
             'change' : (v) -> vco3Volume(v)
         })
+
+    setupFilter: ->
+        self = @
+        filterCutoff = (value) -> self.syntho.filter.frequency.value = value 
+        filterPeak = (value) -> self.syntho.filter.Q.value = value 
+        $("#filter-cutoff").knob({
+            'change' : (v) -> filterCutoff(v)
+        })
+        $("#filter-peak").knob({
+            'change' : (v) -> filterPeak(v)
+        })
+
 
