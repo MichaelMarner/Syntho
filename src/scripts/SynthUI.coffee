@@ -78,6 +78,7 @@ class @SynthUI
         filterCutoff = (value) -> 
             self.syntho.filter.frequency.value = value 
             self.syntho.filter.frequencyKnob = value 
+
         filterPeak = (value) -> self.syntho.filter.Q.value = value 
         $("#filter-cutoff").knob({
             'change' : (v) -> filterCutoff(v)
@@ -90,9 +91,11 @@ class @SynthUI
             value = $("input[name=filter-mod]:checked").val()
             if (value == "fixed")
                 self.syntho.filter.lfoHookup.gain.value = 0 
+                self.syntho.resetFilter()
                 self.syntho.filter.mod = 'fixed'
             else if (value == "lfo")
                 self.syntho.filter.lfoHookup.gain.value = 3 
+                self.syntho.resetFilter()
                 self.syntho.filter.mod = 'lfo'
             else if (value="adsr")
                 self.syntho.filter.lfoHookup.gain.value = 0 

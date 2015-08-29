@@ -76,6 +76,11 @@ class @Syntho
                 @filter.frequency.setValueAtTime(val, @audioContext.currentTime)
                 @filter.frequency.linearRampToValueAtTime(0, @audioContext.currentTime + (@release / 1000.0))
 
+    resetFilter: ->
+                @filter.frequency.cancelScheduledValues(@audioContext.currentTime)
+                @filter.frequency.setValueAtTime(@filter.frequencyKnob, @audioContext.currentTime)
+
+
     initVCO: (audioContext) -> 
         vco = audioContext.createOscillator()
         vco.type = 'sawtooth'
