@@ -6,6 +6,7 @@ class @SynthUI
         @.setupTuning()
         @.setupVCOVolumes()
         @.setupFilter()
+        @.setupLFO()
 
 
 
@@ -84,3 +85,18 @@ class @SynthUI
         })
 
 
+    setupLFO: ->
+        self = @
+        $("input[name=lfo-type]").change ->
+            value = $("input[name=lfo-type]:checked").val()
+            self.syntho.lfo.type = value
+            
+        rate = (value) -> self.syntho.lfo.frequency.value = value 
+        depth = (value) -> self.syntho.lfo.amp.gain.value = value 
+
+        $("#lfo-rate").knob({
+            'change' : (v) -> rate(v)
+        })
+        $("#lfo-depth").knob({
+            'change' : (v) -> depth(v)
+        })

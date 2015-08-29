@@ -37,6 +37,17 @@ class @Syntho
         
         @gate = @audioContext.createGain()
         @gate.gain.value = 0
+
+        @lfo = @audioContext.createOscillator()
+        @lfo.type = 'triangle'
+        @lfo.frequency.value = 0
+        @lfo.start()
+        @lfo.amp = @audioContext.createGain()
+        @lfo.amp.gain.value = 0
+        @lfo.connect(@lfo.amp)
+        @lfo.amp.connect(@vco1.frequency)
+        @lfo.amp.connect(@vco2.frequency)
+        @lfo.amp.connect(@vco3.frequency)
         
         
         @filter = @audioContext.createBiquadFilter()
