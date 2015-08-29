@@ -9,8 +9,9 @@ class @Syntho
         @vco2 = @.initVCO(@audioContext)
         @vco3 = @.initVCO(@audioContext)
         
-        @gate = @audioContext.createGain()
-        @gate.gain.value = 0
+        @vca = @audioContext.createGain()
+        @vca.gain.value = 0
+        @vca.mode = 'gate'
 
         @filter = @audioContext.createBiquadFilter()
         @filter.type = 'lowpass'
@@ -36,9 +37,32 @@ class @Syntho
         @vco1.amp.connect(@filter)
         @vco2.amp.connect(@filter)
         @vco3.amp.connect(@filter)
-        @filter.connect(@gate)
-        @gate.connect(@audioContext.destination)
+        @filter.connect(@vca)
 
+        @vca.connect(@audioContext.destination)
+
+
+        @attack = 100 
+        @decay = 0 
+        @sustain = 1.0 
+        @release = 10 
+
+    trigger: (value) ->
+        if (value == 1)
+            if (@vca.mode == 'adsr')
+                @vca.gain.setValueAtTime(0, @audioContext.currentTime)
+                @vca.gain.linearRampToValueAtTime(1, @audioContext.currentTime + (@attack / 1000.0))
+                @vca.gain.linearRampToValueAtTime(@sustain, @audioContext.currentTime + (@attack / 1000.0) + (@decay / 1000.0))
+            else
+                @vca.gain.setValueAtTime(1, @audioContext.currentTime)
+        else
+            if (@vca.mode == 'adsr')
+                val = @vca.gain.value
+                @vca.gain.cancelScheduledValues(@audioContext.currentTime)
+                @vca.gain.setValueAtTime(val, @audioContext.currentTime)
+                @vca.gain.linearRampToValueAtTime(0, @audioContext.currentTime + (@release / 1000.0))
+            else
+                @vca.gain.setValueAtTime(0, @audioContext.currentTime)
 
     initVCO: (audioContext) -> 
         vco = audioContext.createOscillator()

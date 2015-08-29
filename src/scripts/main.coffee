@@ -12,13 +12,13 @@ $( ->
             syntho.vco1.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco1.octave, note), audioContext.currentTime)
             syntho.vco2.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco2.octave, note), audioContext.currentTime)
             syntho.vco3.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco3.octave, note), audioContext.currentTime)
-            syntho.gate.gain.value = 1
+            # syntho.gate.gain.value = 1
         else
-            syntho.gate.gain.value = 0
+            # syntho.gate.gain.value = 0
 
     
     triggerCallback = (message, value) ->
-        console.log("Trigger")
+        syntho.trigger(value)
     
     PubSub.subscribe('Keyboard', keyboardCallback)
     PubSub.subscribe('Trigger', triggerCallback)

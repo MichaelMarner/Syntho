@@ -40,6 +40,9 @@ class @KeyboardInput
         note = @getNoteFromKeyCode(event.keyCode)
         @scanner[note] = if note >= 0 then 0 
         PubSub.publish('Keyboard', @getActiveNote());
+        if (!@isKeyDown())
+             PubSub.publish('Trigger', 0);
+
 
     isKeyDown: ->
         return @getActiveNote() >= 0

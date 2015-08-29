@@ -1,12 +1,12 @@
 
 class @SynthUI
     constructor: (@syntho) ->
-        #$( -> $(".dial").knob(); );
-        @.setupOctaves()
-        @.setupTuning()
-        @.setupVCOVolumes()
-        @.setupFilter()
-        @.setupLFO()
+        @setupOctaves()
+        @setupTuning()
+        @setupVCOVolumes()
+        @setupFilter()
+        @setupLFO()
+        @setupADSR()
 
 
 
@@ -125,3 +125,13 @@ class @SynthUI
         $("#lfo-depth").knob({
             'change' : (v) -> depth(v)
         })
+
+
+    setupADSR: ->
+        self = @
+        $("input[name=vca-mode]").change ->
+            value = $("input[name=vca-mode]:checked").val()
+            self.syntho.vca.mode = value
+
+
+
