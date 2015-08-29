@@ -56,6 +56,11 @@ class @Syntho
                 @vca.gain.linearRampToValueAtTime(@sustain, @audioContext.currentTime + (@attack / 1000.0) + (@decay / 1000.0))
             else
                 @vca.gain.setValueAtTime(1, @audioContext.currentTime)
+            if (@filter.mod == 'adsr') 
+                @filter.frequency.cancelScheduledValues(@audioContext.currentTime)
+                @filter.frequency.setValueAtTime(0, @audioContext.currentTime)
+                @filter.frequency.linearRampToValueAtTime(@filter.frequencyKnob, @audioContext.currentTime + (@attack / 1000.0))
+                @filter.frequency.linearRampToValueAtTime(@sustain * @filter.frequencyKnob, @audioContext.currentTime + (@attack / 1000.0) + (@decay / 1000.0))
         else
             if (@vca.mode == 'adsr')
                 val = @vca.gain.value
@@ -64,6 +69,12 @@ class @Syntho
                 @vca.gain.linearRampToValueAtTime(0, @audioContext.currentTime + (@release / 1000.0))
             else
                 @vca.gain.setValueAtTime(0, @audioContext.currentTime)
+
+            if (@filter.mod == 'adsr') 
+                val = @filter.frequency.value
+                @filter.frequency.cancelScheduledValues(@audioContext.currentTime)
+                @filter.frequency.setValueAtTime(val, @audioContext.currentTime)
+                @filter.frequency.linearRampToValueAtTime(0, @audioContext.currentTime + (@release / 1000.0))
 
     initVCO: (audioContext) -> 
         vco = audioContext.createOscillator()
