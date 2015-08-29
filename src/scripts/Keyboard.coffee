@@ -27,9 +27,13 @@ class @KeyboardInput
 
     # Handler for a keydown event
     keydown: (event) ->
+        toTrigger = !@isKeyDown()
         note = @getNoteFromKeyCode(event.keyCode)
-        @scanner[note ] = if note >= 0 then 1
-        PubSub.publish('Keyboard', @getActiveNote());
+        if (note >= 0)
+            @scanner[note ] = 1
+            PubSub.publish('Keyboard', @getActiveNote());
+            if (toTrigger)
+                PubSub.publish('Trigger', 1);
 
     # Handler for a keyup event
     keyup: (event) ->

@@ -7,7 +7,7 @@ $( ->
 
 
     # connect the physical keyboard to the VCOs
-    callback = (message, note) ->
+    keyboardCallback = (message, note) ->
         if note >= 0 
             syntho.vco1.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco1.octave, note), audioContext.currentTime)
             syntho.vco2.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco2.octave, note), audioContext.currentTime)
@@ -17,7 +17,10 @@ $( ->
             syntho.gate.gain.value = 0
 
     
+    triggerCallback = (message, value) ->
+        console.log("Trigger")
     
-    PubSub.subscribe('Keyboard', callback)
+    PubSub.subscribe('Keyboard', keyboardCallback)
+    PubSub.subscribe('Trigger', triggerCallback)
 
 )
