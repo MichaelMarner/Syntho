@@ -133,5 +133,21 @@ class @SynthUI
             value = $("input[name=vca-mode]:checked").val()
             self.syntho.vca.mode = value
 
+        attack = (value) -> self.syntho.attack = value 
+        decay = (value) -> self.syntho.decay = value 
+        sustain = (value) -> self.syntho.sustain = value 
+        release = (value) -> self.syntho.release = value 
 
+        $("#ev-attack").knob({
+            'change' : (v) -> attack(v)
+        })
+        $("#ev-decay").knob({
+            'change' : (v) -> decay(v)
+        })
+        $("#ev-sustain").knob({
+            'change' : (v) -> sustain(v)
+        })
+        $("#ev-release").knob({
+            'change' : (v) -> release(v)
+        })
 
