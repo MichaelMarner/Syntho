@@ -15,7 +15,8 @@ class @Syntho
 
         @filter = @audioContext.createBiquadFilter()
         @filter.type = 'lowpass'
-        @filter.frequency.value = 20000
+        @filter.frequency.value = 12000
+        @filter.frequencyKnob = 12000
         @filter.Q.value = 0
         @filter.lfoHookup = @audioContext.createGain()
         @filter.lfoHookup.gain.value = 0
@@ -55,7 +56,7 @@ class @Syntho
                 @vca.gain.linearRampToValueAtTime(1, @audioContext.currentTime + (@attack / 1000.0))
                 @vca.gain.linearRampToValueAtTime(@sustain, @audioContext.currentTime + (@attack / 1000.0) + (@decay / 1000.0))
             else
-                @vca.gain.setValueAtTime(1, @audioContext.currentTime)
+                @vca.gain.linearRampToValueAtTime(1, @audioContext.currentTime + 0.001)
             if (@filter.mod == 'adsr') 
                 @filter.frequency.cancelScheduledValues(@audioContext.currentTime)
                 @filter.frequency.setValueAtTime(0, @audioContext.currentTime)
@@ -68,7 +69,7 @@ class @Syntho
                 @vca.gain.setValueAtTime(val, @audioContext.currentTime)
                 @vca.gain.linearRampToValueAtTime(0, @audioContext.currentTime + (@release / 1000.0))
             else
-                @vca.gain.setValueAtTime(0, @audioContext.currentTime)
+                @vca.gain.linearRampToValueAtTime(0, @audioContext.currentTime + 0.001)
 
             if (@filter.mod == 'adsr') 
                 val = @filter.frequency.value
