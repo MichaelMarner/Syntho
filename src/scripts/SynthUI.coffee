@@ -89,7 +89,7 @@ class @SynthUI
             if (value == "fixed")
                 self.syntho.filter.lfoHookup.gain.value = 0 
             else if (value == "lfo")
-                self.syntho.filter.lfoHookup.gain.value = 1 
+                self.syntho.filter.lfoHookup.gain.value = 3 
 
 
     setupLFO: ->
