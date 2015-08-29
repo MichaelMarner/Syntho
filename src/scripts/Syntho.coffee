@@ -42,14 +42,15 @@ class @Syntho
         @vca.connect(@audioContext.destination)
 
 
-        @attack = 100 
+        @attack = 0 
         @decay = 0 
         @sustain = 1.0 
-        @release = 10 
+        @release = 0 
 
     trigger: (value) ->
         if (value == 1)
             if (@vca.mode == 'adsr')
+                @vca.gain.cancelScheduledValues(@audioContext.currentTime)
                 @vca.gain.setValueAtTime(0, @audioContext.currentTime)
                 @vca.gain.linearRampToValueAtTime(1, @audioContext.currentTime + (@attack / 1000.0))
                 @vca.gain.linearRampToValueAtTime(@sustain, @audioContext.currentTime + (@attack / 1000.0) + (@decay / 1000.0))
