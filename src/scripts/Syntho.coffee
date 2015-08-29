@@ -47,6 +47,14 @@ class @Syntho
         @gate = @audioContext.createGain()
         @gate.gain.value = 0
 
+        @filter = @audioContext.createBiquadFilter()
+        @filter.type = 'lowpass'
+        @filter.frequency.value = 20000
+        @filter.Q.value = 0
+        @filter.lfoHookup = @audioContext.createGain()
+        @filter.lfoHookup.gain.value = 0
+        @filter.lfoHookup.connect(@filter.frequency)
+
         @lfo = @audioContext.createOscillator()
         @lfo.type = 'triangle'
         @lfo.frequency.value = 0
@@ -59,12 +67,9 @@ class @Syntho
         @lfo.amp.connect(@vco1.lfoHookup)
         @lfo.amp.connect(@vco2.lfoHookup)
         @lfo.amp.connect(@vco3.lfoHookup)
+        @lfo.amp.connect(@filter.lfoHookup)
         
         
-        @filter = @audioContext.createBiquadFilter()
-        @filter.type = 'lowpass'
-        @filter.frequency.value = 20000
-        @filter.Q.value = 0
         
         @vco1.amp.connect(@filter)
         @vco2.amp.connect(@filter)
