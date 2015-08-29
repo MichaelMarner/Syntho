@@ -90,6 +90,24 @@ class @SynthUI
         $("input[name=lfo-type]").change ->
             value = $("input[name=lfo-type]:checked").val()
             self.syntho.lfo.type = value
+
+        $("#vco1-lfo").click ->
+            if (self.syntho.vco1.lfoHookup.gain.value  == 1)
+                self.syntho.vco1.lfoHookup.gain.value = 0
+            else
+                self.syntho.vco1.lfoHookup.gain.value = 1
+
+        $("#vco2-lfo").click ->
+            if (self.syntho.vco2.lfoHookup.gain.value  == 1)
+                self.syntho.vco2.lfoHookup.gain.value = 0
+            else
+                self.syntho.vco2.lfoHookup.gain.value = 1
+
+        $("#vco3-lfo").click ->
+            if (self.syntho.vco3.lfoHookup.gain.value  == 1)
+                self.syntho.vco3.lfoHookup.gain.value = 0
+            else
+                self.syntho.vco3.lfoHookup.gain.value = 1
             
         rate = (value) -> self.syntho.lfo.frequency.value = value 
         depth = (value) -> self.syntho.lfo.amp.gain.value = value 

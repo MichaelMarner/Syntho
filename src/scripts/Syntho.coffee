@@ -12,6 +12,9 @@ class @Syntho
         @vco1.octave = 3
         @vco1.amp = @audioContext.createGain()
         @vco1.amp.gain.value = 1
+        @vco1.lfoHookup = @audioContext.createGain()
+        @vco1.lfoHookup.gain.value = 0
+        @vco1.lfoHookup.connect(@vco1.frequency)
         @vco1.connect(@vco1.amp)
 
         
@@ -23,6 +26,9 @@ class @Syntho
         @vco2.octave = 3
         @vco2.amp = @audioContext.createGain()
         @vco2.amp.gain.value = 1
+        @vco2.lfoHookup = @audioContext.createGain()
+        @vco2.lfoHookup.gain.value = 0
+        @vco2.lfoHookup.connect(@vco2.frequency)
         @vco2.connect(@vco2.amp)
 
         @vco3 = @audioContext.createOscillator()
@@ -33,6 +39,9 @@ class @Syntho
         @vco3.octave = 3
         @vco3.amp = @audioContext.createGain()
         @vco3.amp.gain.value = 1
+        @vco3.lfoHookup = @audioContext.createGain()
+        @vco3.lfoHookup.gain.value = 0
+        @vco3.lfoHookup.connect(@vco3.frequency)
         @vco3.connect(@vco3.amp)
         
         @gate = @audioContext.createGain()
@@ -45,9 +54,11 @@ class @Syntho
         @lfo.amp = @audioContext.createGain()
         @lfo.amp.gain.value = 0
         @lfo.connect(@lfo.amp)
-        @lfo.amp.connect(@vco1.frequency)
-        @lfo.amp.connect(@vco2.frequency)
-        @lfo.amp.connect(@vco3.frequency)
+
+
+        @lfo.amp.connect(@vco1.lfoHookup)
+        @lfo.amp.connect(@vco2.lfoHookup)
+        @lfo.amp.connect(@vco3.lfoHookup)
         
         
         @filter = @audioContext.createBiquadFilter()
