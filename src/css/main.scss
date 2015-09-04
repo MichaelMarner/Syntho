@@ -1,12 +1,30 @@
 body {
     background-color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .syntho {
 }
 
+
 h2 {
     text-align: center;
+}
+
+.btn-xs {
+    font-size: 9.5px;
+}
+
+.btn-group-xs .btn {
+    font-size: 9.5px;
+}
+
+.btn-group-xs .btn-xs {
+    font-size: 9.5px;
+}
+
+h1 {
+    font-family: 'Orbitron';
 }
 
 .dial-container {
