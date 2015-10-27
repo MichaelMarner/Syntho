@@ -1,8 +1,19 @@
 # Syntho - An HTML5 Synthesizer
 
 Written by Michael Marner <michael@20papercups.net>
-
 MIT License
+
+## Live Demo
+
+Try Syntho now!
+
+http://www.20papercups.net/syntho/
+
+### Keyboard
+
+At the moment the on screen keyboard is yet to be implemented. Instead, use
+your actual keyboard. Syntho has 1 octave of keys, with C starting at the C key
+on a standard QWERTY keyboard.
 
 ## Building
 We are using Grunt to build Syntho from CoffeeScript and Sass. You will need
