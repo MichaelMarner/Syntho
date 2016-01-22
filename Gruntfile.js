@@ -20,15 +20,6 @@ module.exports = function(grunt) {
       },
     },
 
-    copy: {
-      build: {
-        cwd: 'src',
-        src: ['**', '!**/*.coffee'],
-        dest: 'build',
-        expand: true
-      },
-    },
-
     clean: {
       build: {
         src: ['build'],
@@ -64,41 +55,25 @@ module.exports = function(grunt) {
         },
       }
     },
-    watch: {
-      styles: {
-        files: ['src/**/*.scss'],
-        tasks: ['sass','cssmin'],
-      },
-      scripts: {
-        files: ['src/**/*.coffee'],
-        tasks: ['build'],
-      },
-      copy: {
-        files: ['src/**', '!src/**/*.scss', '!src/**/*.coffee'],
-        tasks: ['copy'],
-      }
-    },
     connect: {
       server: {
         options: {
           port: 4000,
           base: 'build',
+          keepalive: true,
         }
       }
     },
     assemble: {
       options: {
         assets: "path/to/assets",
-        data:   "path/to/config.json"
+        data:   "path/to/config.json",
+        partials: ["src/templates/partials/**/*.hbs"],
+        flatten: true,
       },
-      project: {
-        options: {
-          layout: "path/to/default-layout.hbs",
-          partials: "path/to/partials/**/*.hbs"
-        },
-        files: {
-          'dest': ["path/to/pages/**/*.hbs" ]
-        }
+      syntho: {
+        src: ["src/templates/index.hbs"],
+        dest: 'build/',
       }
     }
   });
@@ -106,17 +81,16 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'build',
     'Compile all the things',
-    ['clean','assemble','copy','bower_concat','sass','cssmin','coffee', 'uglify']
+    ['clean','assemble','bower_concat','sass','cssmin','coffee', 'uglify']
   );
   grunt.registerTask(
     'serve',
     'Compile all the things and make them visible',
-    ['build', 'connect', 'watch']
+    ['build', 'connect']
   );
 
 
   grunt.loadNpmTasks('grunt-assemble');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-sass');
