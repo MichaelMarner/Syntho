@@ -40,78 +40,10 @@
                   {{> filter name='filter'}}
                 </div>
                 <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            LFO
-                            <div class="btn-group btn-group-xs pull-right" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input name="lfo-type" value="triangle" type="radio" autocomplete="off" checked>tri
-                                </label>
-                                <label class="btn btn-default">
-                                    <input name="lfo-type" value="square" type="radio" autocomplete="off">sq
-                                </label>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="pull-left">
-                                <div class="text-center dial-container dial-container-side">
-                                    <input id="lfo-rate" type="text" value="0" data-step="0.1" data-min="0" data-max="50" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                    <p>Rate</p>
-                                </div>
-                            </div>
-                            <div class="pull-left">
-                            <div class="text-center dial-container dial-container-side">
-                                <input id="lfo-depth" type="text" value="0" data-min="0" data-step="0.1" data-max="100" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                <p>Depth</p>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                  {{> lfo name='lfo'}}
                 </div>
                 <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            ADSR
-
-                            <div class="pull-right">
-                                Amp:
-                            <div class="btn-group btn-group-xs " data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input name="vca-mode" value="gate" type="radio" autocomplete="off">Gate
-                                </label>
-                                <label class="btn btn-default">
-                                    <input name="vca-mode" value="adsr" type="radio" autocomplete="off">ADSR
-                                </label>
-                            </div>
-</div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="pull-left">
-                                <div class="text-center dial-container dial-container-side">
-                                    <input id="ev-attack" type="text" value="0" data-min="0" data-max="4000" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                    <p>Attack</p>
-                                </div>
-                            </div>
-                            <div class="pull-left">
-                            <div class="text-center dial-container dial-container-side">
-                                <input id="ev-decay" type="text" value="0" data-min="0" data-max="4000" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                <p>Decay</p>
-                            </div>
-                            </div>
-                            <div class="pull-left">
-                                <div class="text-center dial-container dial-container-side">
-                                    <input id="ev-sustain" type="text" value="1" data-min="0" data-step="0.05" data-max="1" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                    <p>Sustain</p>
-                                </div>
-                            </div>
-                            <div class="pull-left">
-                            <div class="text-center dial-container dial-container-side">
-                                <input id="ev-release" type="text" value="0" data-min="0" data-max="4000" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                <p>Release</p>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                  {{> adsr name='adsr'}}
                 </div>
             </div>
             <div class="row">
@@ -125,8 +57,5 @@
                         </div>
                 </div>
             </div>
-
-        <a href="https://github.com/MichaelMarner/Syntho"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-
     </body>
 </html>

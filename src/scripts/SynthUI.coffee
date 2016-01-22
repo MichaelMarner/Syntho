@@ -43,10 +43,10 @@ class @SynthUI
 
     setupTuning: ->
         self = @
-        vco1Detune = (value) -> self.syntho.vco1.detune.value = Math.round(value) 
-        vco2Detune = (value) -> self.syntho.vco2.detune.value = Math.round(value) 
-        vco3Detune = (value) -> self.syntho.vco3.detune.value = Math.round(value) 
-        
+        vco1Detune = (value) -> self.syntho.vco1.detune.value = Math.round(value)
+        vco2Detune = (value) -> self.syntho.vco2.detune.value = Math.round(value)
+        vco3Detune = (value) -> self.syntho.vco3.detune.value = Math.round(value)
+
         $("#vco1-detune").knob({
             'change' : (v) -> vco1Detune(v)
         })
@@ -62,7 +62,7 @@ class @SynthUI
         vco1Volume = (value) -> self.syntho.vco1.amp.gain.value = value / 100.0
         vco2Volume = (value) -> self.syntho.vco2.amp.gain.value = value / 100.0
         vco3Volume = (value) -> self.syntho.vco3.amp.gain.value = value / 100.0
- 
+
         $("#vco1-vol").knob({
             'change' : (v) -> vco1Volume(v)
         })
@@ -75,11 +75,11 @@ class @SynthUI
 
     setupFilter: ->
         self = @
-        filterCutoff = (value) -> 
-            self.syntho.filter.frequency.value = value 
-            self.syntho.filter.frequencyKnob = value 
+        filterCutoff = (value) ->
+            self.syntho.filter.frequency.value = value
+            self.syntho.filter.frequencyKnob = value
 
-        filterPeak = (value) -> self.syntho.filter.Q.value = value 
+        filterPeak = (value) -> self.syntho.filter.Q.value = value
         $("#filter-cutoff").knob({
             'change' : (v) -> filterCutoff(v)
         })
@@ -90,15 +90,15 @@ class @SynthUI
         $("input[name=filter-mod]").change ->
             value = $("input[name=filter-mod]:checked").val()
             if (value == "fixed")
-                self.syntho.filter.lfoHookup.gain.value = 0 
+                self.syntho.filter.lfoHookup.gain.value = 0
                 self.syntho.resetFilter()
                 self.syntho.filter.mod = 'fixed'
             else if (value == "lfo")
-                self.syntho.filter.lfoHookup.gain.value = 3 
+                self.syntho.filter.lfoHookup.gain.value = 3
                 self.syntho.resetFilter()
                 self.syntho.filter.mod = 'lfo'
             else if (value="adsr")
-                self.syntho.filter.lfoHookup.gain.value = 0 
+                self.syntho.filter.lfoHookup.gain.value = 0
                 self.syntho.filter.mod = 'adsr'
 
 
@@ -125,9 +125,9 @@ class @SynthUI
                 self.syntho.vco3.lfoHookup.gain.value = 0
             else
                 self.syntho.vco3.lfoHookup.gain.value = 1
-            
-        rate = (value) -> self.syntho.lfo.frequency.value = value 
-        depth = (value) -> self.syntho.lfo.amp.gain.value = value 
+
+        rate = (value) -> self.syntho.lfo.frequency.value = value
+        depth = (value) -> self.syntho.lfo.amp.gain.value = value
 
         $("#lfo-rate").knob({
             'change' : (v) -> rate(v)
@@ -143,21 +143,20 @@ class @SynthUI
             value = $("input[name=vca-mode]:checked").val()
             self.syntho.vca.mode = value
 
-        attack = (value) -> self.syntho.attack = value 
-        decay = (value) -> self.syntho.decay = value 
-        sustain = (value) -> self.syntho.sustain = value 
-        release = (value) -> self.syntho.release = value 
+        attack = (value) -> self.syntho.attack = value
+        decay = (value) -> self.syntho.decay = value
+        sustain = (value) -> self.syntho.sustain = value
+        release = (value) -> self.syntho.release = value
 
-        $("#ev-attack").knob({
+        $("#adsr-attack").knob({
             'change' : (v) -> attack(v)
         })
-        $("#ev-decay").knob({
+        $("#adsr-decay").knob({
             'change' : (v) -> decay(v)
         })
-        $("#ev-sustain").knob({
+        $("#adsr-sustain").knob({
             'change' : (v) -> sustain(v)
         })
-        $("#ev-release").knob({
+        $("#adsr-release").knob({
             'change' : (v) -> release(v)
         })
-
