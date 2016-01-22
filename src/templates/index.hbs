@@ -28,132 +28,18 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            VCO1
-                            <div class="pull-right">
-                            <button id="vco1-lfo" type="button" class="btn btn-xs btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">
-                               LFO 
-                            </button>
-                        </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="btn-group btn-group-xs" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input type="radio" name="vco1-type" value="sawtooth" id="vco1-saw" autocomplete="off" checked>saw
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco1-type" value="square" id="vco1-square" autocomplete="off">square
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco1-type" value="triangle" id="vco1-tri" autocomplete="off">tri
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco1-type" value="sine" id="vco1-sin" autocomplete="off">sin
-                                </label>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco1-octave" value="3" data-min="1" data-max="6" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Octave</p>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco1-detune" value="0" data-min="-500" data-max="500" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Detune</p>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco1-vol" value="100" data-min="0" data-max="100" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Volume</p>
-                            </div>
-                        </div>
-                    </div>
+                    {{> vco number='1'}}
                 </div>
                 <div class="col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            VCO2
-                            <div class="pull-right">
-                            <button type="button" id="vco2-lfo" class="btn btn-xs btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">
-                               LFO 
-                            </button>
-                        </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="btn-group btn-group-xs" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input type="radio" name="vco2-type" value="sawtooth" autocomplete="off" checked>saw
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco2-type" value="square" autocomplete="off">square
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco2-type" value="triangle" autocomplete="off">tri
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco2-type" value="sine" autocomplete="off">sin
-                                </label>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco2-octave" value="3" data-min="1" data-max="6" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Octave</p>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco2-detune" value="0" data-min="-500" data-max="500" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Detune</p>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco2-vol" value="100" data-min="0" data-max="100" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Volume</p>
-                            </div>
-                        </div>
-                    </div>
+                    {{> vco number='2'}}
                 </div>
                 <div class="col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            VCO3
-                            <div class="pull-right">
-                            <button type="button" id="vco3-lfo" class="btn btn-xs btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">
-                               LFO 
-                            </button>
-                        </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="btn-group btn-group-xs" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input type="radio" name="vco3-type" value="sawtooth" autocomplete="off" checked>saw
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco3-type" value="square" autocomplete="off">square
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco3-type" value="triangle" autocomplete="off">tri
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio"  name="vco3-type" value="sine" autocomplete="off">sin
-                                </label>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco3-octave" value="3" data-min="1" data-max="6" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Octave</p>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco3-detune" value="0" data-min="-500" data-max="500" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Detune</p>
-                            </div>
-                            <div class="text-center dial-container">
-                            <input type="text" id="vco3-vol" value="100" data-min="0" data-max="100" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                            <p>Volume</p>
-                            </div>
-                        </div>
-                    </div>
+                    {{> vco number='3'}}
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Filter 
+                            Filter
                             <div class="btn-group btn-group-xs pull-right" data-toggle="buttons">
                                 <label class="btn btn-default active">
                                     <input name="filter-mod" type="radio" value="fixed" autocomplete="off" checked>fixed
