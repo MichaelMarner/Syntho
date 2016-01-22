@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{name}}
+    <div class="btn-group btn-group-xs pull-right" data-toggle="buttons">
+      <label class="btn btn-default active">
+        <input name="{{name}}-type" value="triangle" type="radio" autocomplete="off" checked>tri
+      </label>
+      <label class="btn btn-default">
+        <input name="{{name}}-type" value="square" type="radio" autocomplete="off">sq
+      </label>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="pull-left">
+      <div class="text-center dial-container dial-container-side">
+        <input id="{{name}}-rate" type="text" value="0" data-step="0.1" data-min="0" data-max="50" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
+        <p>Rate</p>
+      </div>
+    </div>
+    <div class="pull-left">
+      <div class="text-center dial-container dial-container-side">
+        <input id="{{name}}-depth" type="text" value="0" data-min="0" data-step="0.1" data-max="100" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
+        <p>Depth</p>
+      </div>
+    </div>
+  </div>
+</div>
