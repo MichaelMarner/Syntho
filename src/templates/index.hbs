@@ -37,36 +37,7 @@
                     {{> vco number='3'}}
                 </div>
                 <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Filter
-                            <div class="btn-group btn-group-xs pull-right" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input name="filter-mod" type="radio" value="fixed" autocomplete="off" checked>fixed
-                                </label>
-                                <label class="btn btn-default">
-                                    <input name="filter-mod" type="radio" value="adsr" autocomplete="off">ev
-                                </label>
-                                <label class="btn btn-default">
-                                    <input name="filter-mod" value="lfo" type="radio" autocomplete="off">lfo
-                                </label>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="pull-left">
-                                <div class="text-center dial-container dial-container-side">
-                                    <input id="filter-cutoff" type="text" value="12000" data-min="0" data-max="12000" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                    <p>Cutoff</p>
-                                </div>
-                            </div>
-                            <div class="pull-left">
-                            <div class="text-center dial-container dial-container-side">
-                                <input id="filter-peak" type="text" value="0" data-min="0" data-max="50" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
-                                <p>Peak</p>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                  {{> filter name='filter'}}
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
