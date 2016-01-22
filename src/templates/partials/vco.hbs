@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        vco{{number}}
+        <div class="pull-right">
+        <button id="vco{{number}}-lfo" type="button" class="btn btn-xs btn-default" data-toggle="button" aria-pressed="false" autocomplete="off">
+           LFO
+        </button>
+    </div>
+    </div>
+    <div class="panel-body">
+
+        <div class="btn-group btn-group-xs" data-toggle="buttons">
+            <label class="btn btn-default active">
+                <input type="radio" name="vco{{number}}-type" value="sawtooth" id="vco{{number}}-saw" autocomplete="off" checked>saw
+            </label>
+            <label class="btn btn-default">
+                <input type="radio"  name="vco{{number}}-type" value="square" id="vco{{number}}-square" autocomplete="off">square
+            </label>
+            <label class="btn btn-default">
+                <input type="radio"  name="vco{{number}}-type" value="triangle" id="vco{{number}}-tri" autocomplete="off">tri
+            </label>
+            <label class="btn btn-default">
+                <input type="radio"  name="vco{{number}}-type" value="sine" id="vco{{number}}-sin" autocomplete="off">sin
+            </label>
+        </div>
+        <div class="text-center dial-container">
+        <input type="text" id="vco{{number}}-octave" value="3" data-min="1" data-max="6" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
+        <p>Octave</p>
+        </div>
+        <div class="text-center dial-container">
+        <input type="text" id="vco{{number}}-detune" value="0" data-min="-500" data-max="500" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
+        <p>Detune</p>
+        </div>
+        <div class="text-center dial-container">
+        <input type="text" id="vco{{number}}-vol" value="100" data-min="0" data-max="100" data-angleoffset="-125" data-angleArc="250" data-width="80" data-height="80" class="dial">
+        <p>Volume</p>
+        </div>
+    </div>
+</div>
