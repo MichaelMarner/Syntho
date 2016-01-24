@@ -1,34 +1,34 @@
-#
-# Syntho - A Web based Synthesizer
-# by Michael Marner <michael@20papercups.net>
-#
+export default class { 
 
+    constructor () {
+        this.map = [ ];
+        this.map.push(this.generateOctave(4));
+        this.map.push(this.generateOctave(16));
+        this.map.push(this.generateOctave(40));
+        this.map.push(this.generateOctave(52));
+        this.map.push(this.generateOctave(64));
+        this.map.push(this.generateOctave(76));
+    }
 
+    getFrequency (octave, note) {
+        if (note >0 && note <= 12) {
+            return this.map[octave][note];
+        }
+        return 0;
+    }
 
-class @FrequencyMap
-
-    constructor: ->
-        @map = [ ]
-        @map.push(@generateOctave(4))
-        @map.push(@generateOctave(16))
-        @map.push(@generateOctave(40))
-        @map.push(@generateOctave(52))
-        @map.push(@generateOctave(64))
-        @map.push(@generateOctave(76))
-
-    getFrequency: (octave, note) ->
-        return @map[octave][note] if note >=0 && note <= 12
-
-
-    generateOctave: (startingNote) ->
+    generateOctave(startingNote) {
         octave = []
-        for num in [startingNote..startingNote+12]
-            octave.push(@calculateFrequency(num))
+        for (i=startingNote; i < startingNote+12; i++) 
+            octave.push(this.calculateFrequency(i))
         return octave;
+    }
 
-
-    calculateFrequency: (note) ->
-        twelveRoot2 = 1.0594630943592952645
-        a = 440
+    calculateFrequency(note) {
+        const twelveRoot2 = 1.0594630943592952645
+        const a = 440
         relativeNote = note - 49
         return a * Math.pow(twelveRoot2, relativeNote);
+    }
+}
+
