@@ -3,13 +3,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        cssmin: {
-            target: {
-                files: {
-                    'build/application.css': ['build/**/*.css']
-                }
-            }
-        },
         bower_concat: {
             all: {
                 dest: 'build/bower.js',
@@ -19,7 +12,6 @@ module.exports = function(grunt) {
                 }
             },
         },
-
         clean: {
             build: {
                 src: ['build'],
@@ -32,6 +24,13 @@ module.exports = function(grunt) {
                 src: '**/*.coffee',
                 dest: 'build',
                 ext: '.js'
+            }
+        },
+        cssmin: {
+            target: {
+                files: {
+                    'build/application.css': ['build/**/*.css']
+                }
             }
         },
         qunit: {
@@ -72,64 +71,53 @@ module.exports = function(grunt) {
                 tasks: ['copy'],
             }
         },
-    }
-},
-connect: {
-    server: {
-        options: {
-            port: 4000,
-            base: 'build',
-            keepalive: true,
-        }
-    }
-    assemble: {
-        options: {
-            assets: "path/to/assets",
-            data:   "path/to/config.json",
-            partials: ["src/templates/partials/**/*.hbs"],
-            flatten: true,
+        connect: {
+            server: {
+                options: {
+                    port: 4000,
+                    base: 'build',
+                    keepalive: true,
+                }
+            }
         },
-        syntho: {
-            src: ["src/templates/index.hbs"],
-            dest: 'build/',
+        assemble: {
+            options: {
+                assets: "path/to/assets",
+                data:   "path/to/config.json",
+                partials: ["src/templates/partials/**/*.hbs"],
+                flatten: true,
+            },
+            syntho: {
+                src: ["src/templates/index.hbs"],
+                dest: 'build/',
+            }
         }
-    }
-});
+    });
 
-grunt.registerTask(
-    'build',
-    'Compile all the things',
-    ['clean','assemble','bower_concat','sass','cssmin','coffee', 'uglify']
-);
-grunt.registerTask(
-    'serve',
-    'Compile all the things and make them visible',
-    ['build', 'connect']
-);
+    grunt.registerTask(
+        'build',
+        'Compile all the things',
+        ['clean','assemble','bower_concat','sass','cssmin','coffee', 'uglify']
+    );
+    grunt.registerTask(
+        'serve',
+        'Compile all the things and make them visible',
+        ['build', 'connect']
+    );
 
 
-<<<<<<< c8704e63543b493579d9e2bfb9286f2c7d1150de
-grunt.loadNpmTasks('grunt-assemble');
-grunt.loadNpmTasks('grunt-contrib-clean');
-grunt.loadNpmTasks('grunt-contrib-coffee');
-grunt.loadNpmTasks('grunt-contrib-sass');
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-contrib-connect');
-grunt.loadNpmTasks('grunt-bower-concat');
-grunt.loadNpmTasks('grunt-contrib-cssmin');
-=======
-grunt.loadNpmTasks('grunt-contrib-copy');
-grunt.loadNpmTasks('grunt-contrib-clean');
-grunt.loadNpmTasks('grunt-contrib-coffee');
-grunt.loadNpmTasks('grunt-contrib-sass');
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-contrib-connect');
-grunt.loadNpmTasks('grunt-bower-concat');
-grunt.loadNpmTasks('grunt-contrib-cssmin');
-grunt.loadNpmTasks('grunt-contrib-qunit');
->>>>>>> Fix filter LFO gain.
+    grunt.loadNpmTasks('grunt-assemble');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-bower-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
 
 
 };
