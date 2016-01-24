@@ -94,7 +94,7 @@ class @SynthUI
                 self.syntho.resetFilter()
                 self.syntho.filter.mod = 'fixed'
             else if (value == "lfo")
-                self.syntho.filter.lfoHookup.gain.value = 3
+                self.syntho.filter.lfoHookup.gain.value = 8 
                 self.syntho.resetFilter()
                 self.syntho.filter.mod = 'lfo'
             else if (value="adsr")
