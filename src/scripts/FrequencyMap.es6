@@ -11,7 +11,7 @@ class FrequencyMap {
     }
 
     getFrequency (octave, note) {
-        if (note >0 && note <= 12) {
+        if (note >= 0 && note <= 12) {
             return this.map[octave][note];
         }
         return 0;
@@ -19,7 +19,7 @@ class FrequencyMap {
 
     generateOctave(startingNote) {
         let octave = []
-        for (let i=startingNote; i < startingNote+12; i++) 
+        for (let i=startingNote; i <= startingNote+12; i++) 
             octave.push(this.calculateFrequency(i))
         return octave;
     }
