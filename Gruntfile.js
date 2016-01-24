@@ -3,6 +3,18 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        babel: {
+            options: {
+                sourceMap: true,
+                presets: ['es2015'],
+            },
+            files: {
+                expand: true,
+                src: ['src/scripts/*.es6'],
+                ext: '-compiled.js',
+                dest: 'build'
+            }
+        },
         bower_concat: {
             all: {
                 dest: 'build/bower.js',
@@ -97,7 +109,7 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'build',
         'Compile all the things',
-        ['clean','assemble','bower_concat','sass','cssmin','coffee', 'uglify']
+        ['clean','assemble','bower_concat','sass','cssmin','babel','coffee', 'uglify']
     );
     grunt.registerTask(
         'serve',
@@ -107,6 +119,7 @@ module.exports = function(grunt) {
 
 
     grunt.loadNpmTasks('grunt-assemble');
+    grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-sass');
