@@ -1,4 +1,4 @@
-export default class { 
+class FrequencyMap { 
 
     constructor () {
         this.map = [ ];
@@ -18,8 +18,8 @@ export default class {
     }
 
     generateOctave(startingNote) {
-        octave = []
-        for (i=startingNote; i < startingNote+12; i++) 
+        let octave = []
+        for (let i=startingNote; i < startingNote+12; i++) 
             octave.push(this.calculateFrequency(i))
         return octave;
     }
@@ -27,7 +27,7 @@ export default class {
     calculateFrequency(note) {
         const twelveRoot2 = 1.0594630943592952645
         const a = 440
-        relativeNote = note - 49
+        let relativeNote = note - 49
         return a * Math.pow(twelveRoot2, relativeNote);
     }
 }

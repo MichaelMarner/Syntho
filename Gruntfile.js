@@ -60,12 +60,12 @@ module.exports = function(grunt) {
         uglify: {
             build: {
                 options: {
-                    mangle: true,
+                    mangle: false,
                     beautify: false,
                 }
                 ,
                 files: {
-                    'build/application.js' : [ 'build/**/*.js' ]
+                    'build/application.js' : [ 'build/bower.js', 'build/scripts/**/*.js', 'build/src/**/*.js' ]
                 },
             }
         },
