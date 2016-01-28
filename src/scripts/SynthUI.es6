@@ -8,6 +8,7 @@ class SynthUI {
         this.setupFilter()
         this.setupLFO()
         this.setupADSR()
+        this.setupScreenKeyboard();
     }
 
     setupOctaves() {
@@ -179,5 +180,15 @@ class SynthUI {
                 this.syntho.release = v
             }
         })
+    }
+
+    setupScreenKeyboard() {
+        $(".keyboard").mousedown((event) => {
+            PubSub.publish('Keyboard', event.target.id);
+            PubSub.publish('Trigger', 1);
+        });
+        $(".keyboard").mouseup((event) => {
+            PubSub.publish('Trigger', 0);
+        });
     }
 }
