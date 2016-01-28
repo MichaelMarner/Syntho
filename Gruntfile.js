@@ -76,20 +76,20 @@ module.exports = function(grunt) {
                 tasks: ['sass','cssmin'],
             },
             scripts: {
-                files: ['src/**/*.coffee'],
-                tasks: ['build'],
+                files: ['src/**/*.es6'],
+                tasks: ['compilescripts'],
             },
-            copy: {
-                files: ['src/**', '!src/**/*.scss', '!src/**/*.coffee'],
-                tasks: ['copy'],
-            }
+            templates: {
+              files: ['src/**/*.hbs'],
+              tasks: ['assemble']
+            },
         },
         connect: {
             server: {
                 options: {
                     port: 4000,
                     base: 'build',
-                    keepalive: true,
+                    keepalive: false,
                 }
             }
         },
@@ -108,14 +108,23 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask(
+      'compilescripts',
+      ['babel','uglify']
+    );
+    grunt.registerTask(
         'build',
         'Compile all the things',
-        ['clean','assemble','bower_concat','sass','cssmin','babel','coffee', 'uglify']
+        ['assemble','bower_concat','sass','cssmin','babel','uglify']
+    );
+    grunt.registerTask(
+        'clean',
+        'Remove build',
+        ['clean']
     );
     grunt.registerTask(
         'serve',
         'Compile all the things and make them visible',
-        ['build', 'connect']
+        ['connect', 'watch']
     );
 
 
@@ -128,8 +137,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-bower-concat');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-qunit');
 
