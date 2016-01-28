@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         cssmin: {
             target: {
                 files: {
-                    'build/application.css': ['build/**/*.css']
+                    'build/application.css': ['build/bower.css','build/css/*.css']
                 }
             }
         },
