@@ -13,17 +13,17 @@ class SynthUI {
     setupOctaves() {
         // VCO Types
         $("input[name=vco1-type]").change( () => {
-            value = $("input[name=vco1-type]:checked").val()
+            let value = $("input[name=vco1-type]:checked").val()
             this.syntho.vco1.type = value
         });
 
         $("input[name=vco2-type]").change(() => {
-            value = $("input[name=vco2-type]:checked").val()
+            let value = $("input[name=vco2-type]:checked").val()
             this.syntho.vco2.type = value
         });
 
         $("input[name=vco3-type]").change(() => {
-            value = $("input[name=vco3-type]:checked").val()
+            let value = $("input[name=vco3-type]:checked").val()
             this.syntho.vco3.type = value
         });
 
@@ -78,8 +78,7 @@ class SynthUI {
 
         $("#filter-cutoff").knob({
             'change' : (v) => {
-                this.syntho.filter.frequency.value = v
-                this.syntho.filter.frequencyKnob = v
+                this.syntho.setFilterFrequency(v);
             }
         })
         $("#filter-peak").knob({

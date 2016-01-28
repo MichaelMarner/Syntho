@@ -109,4 +109,9 @@ class Syntho {
         vco.connect(vco.amp)
         return vco
     }
+
+    setFilterFrequency(value) {
+        this.filter.frequency.setValueAtTime(value, this.audioContext.currentTime);
+        this.filter.frequencyKnob = value;
+    }
 }
