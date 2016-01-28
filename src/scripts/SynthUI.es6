@@ -6,7 +6,7 @@ class SynthUI {
         this.setupTuning()
         this.setupVCOVolumes()
         this.setupFilter()
-        //this.setupLFO()
+        this.setupLFO()
         //this.setupADSR()
     }
 
@@ -89,7 +89,7 @@ class SynthUI {
         })
 
         $("input[name=filter-mod]").change(() => {
-            value = $("input[name=filter-mod]:checked").val()
+            let value = $("input[name=filter-mod]:checked").val()
             if (value == "fixed") {
                 this.syntho.filter.lfoHookup.gain.value = 0
                 this.syntho.resetFilter()
@@ -107,42 +107,53 @@ class SynthUI {
         });
     }
 
+
+    setupLFO() {
+        $("input[name=lfo-type]").change( () => {
+            let value = $("input[name=lfo-type]:checked").val()
+            this.syntho.lfo.type = value
+        });
+
+        $("#vco1-lfo").click( () => {
+            if (this.syntho.vco1.lfoHookup.gain.value  == 1) {
+                this.syntho.vco1.lfoHookup.gain.value = 0
+            }
+            else {
+                this.syntho.vco1.lfoHookup.gain.value = 1
+            }
+        });
+
+        $("#vco2-lfo").click( () => {
+            if (this.syntho.vco2.lfoHookup.gain.value  == 1) {
+                this.syntho.vco2.lfoHookup.gain.value = 0
+            }
+            else {
+                this.syntho.vco2.lfoHookup.gain.value = 1
+            }
+        });
+
+        $("#vco3-lfo").click( () => {
+            if (this.syntho.vco3.lfoHookup.gain.value  == 1) {
+                this.syntho.vco3.lfoHookup.gain.value = 0
+            }
+            else {
+                this.syntho.vco3.lfoHookup.gain.value = 1
+            }
+        });
+
+        $("#lfo-rate").knob({
+            'change' : (v) => {
+                this.syntho.lfo.frequency.value = v
+            }
+        })
+        $("#lfo-depth").knob({
+            'change' : (v) => {
+                this.syntho.lfo.amp.gain.value = v
+            }
+        })
+    }
+
     /*
-
-setupLFO: ->
-this = this.
-$("input[name=lfo-type]").change ->
-value = $("input[name=lfo-type]:checked").val()
-this.syntho.lfo.type = value
-
-$("#vco1-lfo").click ->
-if (this.syntho.vco1.lfoHookup.gain.value  == 1)
-this.syntho.vco1.lfoHookup.gain.value = 0
-else
-this.syntho.vco1.lfoHookup.gain.value = 1
-
-$("#vco2-lfo").click ->
-if (this.syntho.vco2.lfoHookup.gain.value  == 1)
-this.syntho.vco2.lfoHookup.gain.value = 0
-else
-this.syntho.vco2.lfoHookup.gain.value = 1
-
-$("#vco3-lfo").click ->
-if (this.syntho.vco3.lfoHookup.gain.value  == 1)
-this.syntho.vco3.lfoHookup.gain.value = 0
-else
-this.syntho.vco3.lfoHookup.gain.value = 1
-
-rate = (value) -> this.syntho.lfo.frequency.value = value
-depth = (value) -> this.syntho.lfo.amp.gain.value = value
-
-$("#lfo-rate").knob({
-'change' : (v) -> rate(v)
-})
-$("#lfo-depth").knob({
-'change' : (v) -> depth(v)
-})
-
 
 setupADSR: ->
 this = this.
