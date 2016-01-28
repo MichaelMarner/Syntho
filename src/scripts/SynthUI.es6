@@ -5,7 +5,7 @@ class SynthUI {
         this.setupOctaves()
         this.setupTuning()
         this.setupVCOVolumes()
-        //this.setupFilter()
+        this.setupFilter()
         //this.setupLFO()
         //this.setupADSR()
     }
@@ -74,35 +74,40 @@ class SynthUI {
         })
     }
 
+    setupFilter() {
+
+        $("#filter-cutoff").knob({
+            'change' : (v) => {
+                this.syntho.filter.frequency.value = v
+                this.syntho.filter.frequencyKnob = v
+            }
+        })
+        $("#filter-peak").knob({
+            'change' : (v) => {
+                this.syntho.filter.Q.value = v
+            }
+        })
+
+        $("input[name=filter-mod]").change(() => {
+            value = $("input[name=filter-mod]:checked").val()
+            if (value == "fixed") {
+                this.syntho.filter.lfoHookup.gain.value = 0
+                this.syntho.resetFilter()
+                this.syntho.filter.mod = 'fixed'
+            }
+            else if (value == "lfo") {
+                this.syntho.filter.lfoHookup.gain.value = 8
+                this.syntho.resetFilter()
+                this.syntho.filter.mod = 'lfo'
+            }
+            else if (value="adsr") {
+                this.syntho.filter.lfoHookup.gain.value = 0
+                this.syntho.filter.mod = 'adsr'
+            }
+        });
+    }
+
     /*
-setupFilter: ->
-this = this.
-filterCutoff = (value) ->
-this.syntho.filter.frequency.value = value
-this.syntho.filter.frequencyKnob = value
-
-filterPeak = (value) -> this.syntho.filter.Q.value = value
-$("#filter-cutoff").knob({
-'change' : (v) -> filterCutoff(v)
-})
-$("#filter-peak").knob({
-'change' : (v) -> filterPeak(v)
-})
-
-$("input[name=filter-mod]").change ->
-value = $("input[name=filter-mod]:checked").val()
-if (value == "fixed")
-this.syntho.filter.lfoHookup.gain.value = 0
-this.syntho.resetFilter()
-this.syntho.filter.mod = 'fixed'
-else if (value == "lfo")
-this.syntho.filter.lfoHookup.gain.value = 8
-this.syntho.resetFilter()
-this.syntho.filter.mod = 'lfo'
-else if (value="adsr")
-this.syntho.filter.lfoHookup.gain.value = 0
-this.syntho.filter.mod = 'adsr'
-
 
 setupLFO: ->
 this = this.
