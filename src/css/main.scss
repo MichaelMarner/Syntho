@@ -35,6 +35,16 @@ h1 {
     margin-left: 15px;
 }
 
+@mixin noselect() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 @mixin rounded($radius: 1.0em) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
@@ -43,6 +53,7 @@ h1 {
 
 @mixin keyboard() {
     @include rounded;
+    @include noselect;
     height: 150px;
     width: 7.5%;
     padding-left: 6px;
@@ -55,6 +66,9 @@ h1 {
 .white_key {
     @include keyboard;
     background-color: #eee;
+    &:hover {
+    background-color: #fff;
+    }
     border-style: solid;
     border-color: #87ceeb;
     border-width: 2px;
@@ -63,4 +77,7 @@ h1 {
 .black_key {
     @include keyboard;
     background-color: #222;
+    &:hover {
+        background-color: #333;
+    }
 }
