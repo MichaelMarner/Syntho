@@ -7,7 +7,7 @@ class SynthUI {
         this.setupVCOVolumes()
         this.setupFilter()
         this.setupLFO()
-        //this.setupADSR()
+        this.setupADSR()
     }
 
     setupOctaves() {
@@ -153,33 +153,32 @@ class SynthUI {
         })
     }
 
-    /*
 
-setupADSR: ->
-this = this.
-$("input[name=vca-mode]").change ->
-value = $("input[name=vca-mode]:checked").val()
-this.syntho.vca.mode = value
+    setupADSR () {
+        $("input[name=vca-mode]").change( () => {
+            let value = $("input[name=vca-mode]:checked").val()
+            this.syntho.vca.mode = value
+        });
 
-attack = (value) -> this.syntho.attack = value
-decay = (value) -> this.syntho.decay = value
-sustain = (value) -> this.syntho.sustain = value
-release = (value) -> this.syntho.release = value
-
-$("#adsr-attack").knob({
-'change' : (v) -> attack(v)
-})
-$("#adsr-decay").knob({
-'change' : (v) -> decay(v)
-})
-$("#adsr-sustain").knob({
-'change' : (v) -> sustain(v)
-})
-$("#adsr-release").knob({
-'change' : (v) -> release(v)
-})
-
-}
-*/
-
+        $("#adsr-attack").knob({
+            'change' : (v) => {
+                this.syntho.attack = v
+            }
+        })
+        $("#adsr-decay").knob({
+            'change' : (v) => {
+                this.syntho.decay = v
+            }
+        })
+        $("#adsr-sustain").knob({
+            'change' : (v) => {
+                this.syntho.sustain = v
+            }
+        })
+        $("#adsr-release").knob({
+            'change' : (v) => {
+                this.syntho.release = v
+            }
+        })
+    }
 }

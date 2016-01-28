@@ -1,16 +1,16 @@
-// 
+//
 //  Syntho - A Web based Synthesizer
 //  by Michael Marner <michaelthis.20papercups.net>
-// 
+//
 class Syntho {
 
     constructor(audioContext) {
         this.audioContext = audioContext;
 
-        this.vco1 = this.initVCO(audioContext);
-        this.vco2 = this.initVCO(audioContext);
-        this.vco3 = this.initVCO(audioContext);
-        
+        this.vco1 = this.createVCO(audioContext);
+        this.vco2 = this.createVCO(audioContext);
+        this.vco3 = this.createVCO(audioContext);
+
         this.vca = audioContext.createGain()
         this.vca.gain.value = 0
         this.vca.mode = 'gate'
@@ -44,10 +44,10 @@ class Syntho {
 
         this.vca.connect(this.audioContext.destination)
 
-        this.attack = 0 
-        this.decay = 0 
-        this.sustain = 1.0 
-        this.release = 0 
+        this.attack = 0
+        this.decay = 0
+        this.sustain = 1.0
+        this.release = 0
     }
 
     trigger (value) {
@@ -70,7 +70,7 @@ class Syntho {
         }
         else {
             if (this.vca.mode == 'adsr') {
-                val = this.vca.gain.value
+                let val = this.vca.gain.value
                 this.vca.gain.cancelScheduledValues(this.audioContext.currentTime)
                 this.vca.gain.setValueAtTime(val, this.audioContext.currentTime)
                 this.vca.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + (this.release / 1000.0))
@@ -80,7 +80,7 @@ class Syntho {
             }
 
             if (this.filter.mod == 'adsr')  {
-                val = this.filter.frequency.value
+                let val = this.filter.frequency.value
                 this.filter.frequency.cancelScheduledValues(this.audioContext.currentTime)
                 this.filter.frequency.setValueAtTime(val, this.audioContext.currentTime)
                 this.filter.frequency.linearRampToValueAtTime(0, this.audioContext.currentTime + (this.release / 1000.0))
@@ -94,11 +94,11 @@ class Syntho {
     }
 
 
-    initVCO (audioContext) {
+    createVCO (audioContext) {
         let vco = audioContext.createOscillator()
         vco.type = 'sawtooth'
         vco.frequency.value = 440
-        vco.detune.value = 0 
+        vco.detune.value = 0
         vco.start()
         vco.octave = 2
         vco.amp = audioContext.createGain()
@@ -110,4 +110,3 @@ class Syntho {
         return vco
     }
 }
-
