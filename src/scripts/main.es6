@@ -2,7 +2,7 @@ $( () => {
     let audioContext = new (window.AudioContext || window.webkitAudioContext)();
     let syntho = new Syntho(audioContext);
     let ui = new SynthUI(syntho);
-    let kbd = new KeyboardInput;
+    let kbd = new PhysicalKeyboard;
     let freqMap = new FrequencyMap;
 
 
@@ -15,11 +15,11 @@ $( () => {
         }
     }
 
-    
+
     let triggerCallback = (message, value) => {
         syntho.trigger(value)
     }
-    
+
     PubSub.subscribe('Keyboard', keyboardCallback)
     PubSub.subscribe('Trigger', triggerCallback)
 
