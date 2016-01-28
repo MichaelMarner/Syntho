@@ -4,7 +4,7 @@ class SynthUI {
         this.syntho = syntho;
         this.setupOctaves()
         this.setupTuning()
-        //this.setupVCOVolumes()
+        this.setupVCOVolumes()
         //this.setupFilter()
         //this.setupLFO()
         //this.setupADSR()
@@ -56,23 +56,25 @@ class SynthUI {
             }
         })
     }
+    setupVCOVolumes() {
+        $("#vco1-vol").knob({
+            'change' : (v) => {
+                this.syntho.vco1.amp.gain.value = v / 100.0;
+            }
+        })
+        $("#vco2-vol").knob({
+            'change' : (v) => {
+                this.syntho.vco2.amp.gain.value = v / 100.0;
+            }
+        })
+        $("#vco3-vol").knob({
+            'change' : (v) => {
+                this.syntho.vco3.amp.gain.value = v / 100.0;
+            }
+        })
+    }
+
     /*
-    setupVCOVolumes: ->
-    this = this.
-    vco1Volume = (value) -> this.syntho.vco1.amp.gain.value = value / 100.0
-    vco2Volume = (value) -> this.syntho.vco2.amp.gain.value = value / 100.0
-    vco3Volume = (value) -> this.syntho.vco3.amp.gain.value = value / 100.0
-
-    $("#vco1-vol").knob({
-    'change' : (v) -> vco1Volume(v)
-})
-$("#vco2-vol").knob({
-'change' : (v) -> vco2Volume(v)
-})
-$("#vco3-vol").knob({
-'change' : (v) -> vco3Volume(v)
-})
-
 setupFilter: ->
 this = this.
 filterCutoff = (value) ->
