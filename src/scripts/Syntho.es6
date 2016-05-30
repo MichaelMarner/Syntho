@@ -100,7 +100,7 @@ class Syntho {
         vco.frequency.value = 440
         vco.detune.value = 0
         vco.start()
-        vco.octave = 2
+        vco.octave = 3
         vco.amp = audioContext.createGain()
         vco.amp.gain.value = 1
         vco.lfoHookup = audioContext.createGain()
