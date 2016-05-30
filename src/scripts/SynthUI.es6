@@ -29,13 +29,13 @@ class SynthUI {
         });
 
         $("#vco1-octave").knob({
-            'change' : (value) => { this.syntho.vco1.octave = Math.round(value) - 1}
+            'change' : (value) => { this.syntho.vco1.octave = Math.round(value)}
         })
         $("#vco2-octave").knob({
-            'change' : (value) => { this.syntho.vco2.octave = Math.round(value) - 1}
+            'change' : (value) => { this.syntho.vco2.octave = Math.round(value)}
         })
         $("#vco3-octave").knob({
-            'change' : (value) => { this.syntho.vco3.octave = Math.round(value) - 1}
+            'change' : (value) => { this.syntho.vco3.octave = Math.round(value)}
         })
     }
 
