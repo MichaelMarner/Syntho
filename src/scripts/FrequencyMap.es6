@@ -1,19 +1,15 @@
 class FrequencyMap {
 
     constructor () {
-        this.map = [ ];
-        this.map.push(this.generateOctave(4));
-        this.map.push(this.generateOctave(16));
-        this.map.push(this.generateOctave(28));
-        this.map.push(this.generateOctave(40));
-        this.map.push(this.generateOctave(52));
-        this.map.push(this.generateOctave(64));
-        this.map.push(this.generateOctave(76));
+        this.frequencies = [ ];
+        for (let i=0; i < 128; i++) {
+            this.frequencies.push(this.calculateFrequency(i));
+        }
     }
 
     getFrequency (octave, note) {
         if (note >= 0 && note <= 12) {
-            return this.map[octave][note];
+            return this.frequencies[octave*12 + note];
         }
         return 0;
     }
