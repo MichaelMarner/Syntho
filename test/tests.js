@@ -10,14 +10,30 @@ QUnit.test( "constructor test", function( assert ) {
     var fm = new FrequencyMap();
     assert.ok( fm instanceof FrequencyMap, "Default constructor works");
 });
-QUnit.test("getFrequency tests", function(assert) {
+QUnit.test("getNoteIndex(octave, note) tests", function(assert) {
     var fm = new FrequencyMap();
-    assert.close(fm.getFrequency(0, 9), 13.75, null, "A0 is returned correctly");
-    assert.close(fm.getFrequency(1, 9), 27.5, null,  "A1 is returned correctly");
-    assert.close(fm.getFrequency(2, 9), 55, null,  "A2 is returned correctly");
-    assert.close(fm.getFrequency(3, 9), 110, null,  "A3 is returned correctly");
-    assert.close(fm.getFrequency(4, 9), 220, null,  "A4 is returned correctly");
-    assert.close(fm.getFrequency(5, 9), 440, null,  "A440 is returned correctly");
-    assert.close(fm.getFrequency(6, 9), 880, null,  "A6 is returned correctly");
-    assert.close(fm.getFrequency(7, 9), 1760, null,  "A7 is returned correctly");
+
+    // Just enough tests to make sure the multiplication is working
+    assert.strictEqual(fm.getNoteIndex(0, 9), 9, "Note 9 is returned correctly");
+    assert.strictEqual(fm.getNoteIndex(1, 4), 16, "Note 16 is returned correctly");
+    assert.strictEqual(fm.getNoteIndex(2, 0), 24, "Note 24 is returned correctly");
+    assert.strictEqual(fm.getNoteIndex(3, 7), 43, "Note 43 is returned correctly");
+    assert.strictEqual(fm.getNoteIndex(4, 2), 50, "Note 50 is returned correctly");
+    assert.strictEqual(fm.getNoteIndex(5, 6), 66, "Note 66 is returned correctly");
+});
+
+QUnit.test("getFrequency(note) tests", function(assert) {
+    var fm = new FrequencyMap();
+
+    // Test A440 to ensure the offset is correct
+    assert.close(fm.getFrequency(69), 440, null, "A5 is returned correctly");
+
+    // Test a few to make sure the algorithm works
+    assert.close(fm.getFrequency(9), 13.75, null, "Note 9 = 13.75Hz");
+    assert.close(fm.getFrequency(16), 20.6017223071, null,  "Note 16 = 13.75Hz");
+    assert.close(fm.getFrequency(24), 32.7031956626, null,  "Note 24 = 32Hz");
+    assert.close(fm.getFrequency(43), 97.9988589954, null,  "Note 43 = 97Hz");
+    assert.close(fm.getFrequency(50), 146.8323839587, null,  "Note 50 = 146Hz");
+    assert.close(fm.getFrequency(66), 369.9944227116, null,  "Note 66 = 369Hz");
+
 });
