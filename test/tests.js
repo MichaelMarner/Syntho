@@ -1,3 +1,10 @@
+QUnit.assert.close = function(number, expected, error, message ) {
+    if (error === void 0 || error === null ) {
+        error = 0.00001;
+    }
+    var result = number === expected || (number<expected + error && number > expected - error) || false;
+    this.push(result, number, expected, message);
+}
 QUnit.module( "FrequencyMap tests" );
 QUnit.test( "constructor test", function( assert ) {
     var fm = new FrequencyMap();
@@ -5,9 +12,9 @@ QUnit.test( "constructor test", function( assert ) {
 });
 QUnit.test("getFrequency tests", function(assert) {
     var fm = new FrequencyMap();
-    assert.strictEqual(fm.getFrequency(0, 9), 110, "A110 is returned correctly");
-    assert.strictEqual(fm.getFrequency(1, 9), 220, "A220 is returned correctly");
-    assert.strictEqual(fm.getFrequency(2, 9), 440, "A440 is returned correctly");
-    assert.strictEqual(fm.getFrequency(3, 9), 880, "A880 is returned correctly");
-    assert.strictEqual(fm.getFrequency(4, 9), 1760, "A1760 is returned correctly");
+    assert.close(fm.getFrequency(0, 9), 110, null, "A110 is returned correctly");
+    assert.close(fm.getFrequency(1, 9), 220, null,  "A220 is returned correctly");
+    assert.close(fm.getFrequency(2, 9), 440, null,  "A440 is returned correctly");
+    assert.close(fm.getFrequency(3, 9), 880, null,  "A880 is returned correctly");
+    assert.close(fm.getFrequency(4, 9), 1760, null,  "A1760 is returned correctly");
 });
