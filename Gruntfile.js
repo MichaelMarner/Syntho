@@ -29,15 +29,6 @@ module.exports = function(grunt) {
                 src: ['build'],
             },
         },
-        coffee: {
-            build: {
-                expand: true,
-                cwd: 'src',
-                src: '**/*.coffee',
-                dest: 'build',
-                ext: '.js'
-            }
-        },
         cssmin: {
             target: {
                 files: {
