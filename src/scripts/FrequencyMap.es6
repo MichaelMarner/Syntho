@@ -28,7 +28,7 @@ class FrequencyMap {
     calculateFrequency(note) {
         const twelveRoot2 = 1.0594630943592952645
         const a = 440
-        let relativeNote = note - 49
+        let relativeNote = note - 69
         return a * Math.pow(twelveRoot2, relativeNote);
     }
 }
