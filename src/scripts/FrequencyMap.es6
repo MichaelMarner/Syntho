@@ -7,9 +7,16 @@ class FrequencyMap {
         }
     }
 
-    getFrequency (octave, note) {
+    getNoteIndex(octave, note) {
         if (note >= 0 && note <= 12) {
-            return this.frequencies[octave*12 + note];
+            return octave*12 + note;
+        }
+        return 0;
+    }
+
+    getFrequency(note) {
+        if (note >= 0 && note < 128) {
+            return this.frequencies[note];
         }
         return 0;
     }
