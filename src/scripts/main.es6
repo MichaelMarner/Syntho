@@ -9,9 +9,9 @@ $( () => {
     // connect the physical keyboard to the VCOs
     let keyboardCallback = (message, note) => {
         if (note >= 0) {
-            syntho.vco1.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco1.octave, note), audioContext.currentTime)
-            syntho.vco2.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco2.octave, note), audioContext.currentTime)
-            syntho.vco3.frequency.setValueAtTime(freqMap.getFrequency(syntho.vco3.octave, note), audioContext.currentTime)
+            syntho.vco1.frequency.setValueAtTime(freqMap.getFrequency(freqMap.getNoteIndex(syntho.vco1.octave, note)), audioContext.currentTime)
+            syntho.vco2.frequency.setValueAtTime(freqMap.getFrequency(freqMap.getNoteIndex(syntho.vco2.octave, note)), audioContext.currentTime)
+            syntho.vco3.frequency.setValueAtTime(freqMap.getFrequency(freqMap.getNoteIndex(syntho.vco3.octave, note)), audioContext.currentTime)
         }
     }
 
