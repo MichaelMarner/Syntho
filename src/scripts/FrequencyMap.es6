@@ -1,9 +1,10 @@
-class FrequencyMap { 
+class FrequencyMap {
 
     constructor () {
         this.map = [ ];
         this.map.push(this.generateOctave(4));
         this.map.push(this.generateOctave(16));
+        this.map.push(this.generateOctave(28));
         this.map.push(this.generateOctave(40));
         this.map.push(this.generateOctave(52));
         this.map.push(this.generateOctave(64));
@@ -19,7 +20,7 @@ class FrequencyMap {
 
     generateOctave(startingNote) {
         let octave = []
-        for (let i=startingNote; i <= startingNote+12; i++) 
+        for (let i=startingNote; i <= startingNote+12; i++)
             octave.push(this.calculateFrequency(i))
         return octave;
     }
@@ -31,4 +32,3 @@ class FrequencyMap {
         return a * Math.pow(twelveRoot2, relativeNote);
     }
 }
-
