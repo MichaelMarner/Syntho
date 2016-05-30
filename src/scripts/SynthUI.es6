@@ -184,7 +184,7 @@ class SynthUI {
 
     setupScreenKeyboard() {
         $(".keyboard").mousedown((event) => {
-            PubSub.publish('Keyboard', event.target.id);
+            PubSub.publish('Keyboard', parseInt(event.target.id));
             PubSub.publish('Trigger', 1);
         });
         $(".keyboard").mouseup((event) => {
