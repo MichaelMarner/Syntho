@@ -48,7 +48,7 @@ export class FrequencyMap {
   }
 
   generateOctave(startingNote: number): Array<number> {
-    let octave = [];
+    let octave: Array<number> = [];
     for (let i = startingNote; i <= startingNote + 12; i++) octave.push(this.calculateFrequency(i));
     return octave;
   }

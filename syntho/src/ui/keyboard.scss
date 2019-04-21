@@ -1,0 +1,44 @@
+@mixin noselect() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none; /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+@mixin rounded($radius: 1em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.keyboard {
+  @include rounded;
+  @include noselect;
+  height: 150px;
+  width: 7.5%;
+  padding-left: 6px;
+  padding-top: 6px;
+  float: left;
+  margin: 1px;
+}
+
+.white_key {
+  background-color: #eee;
+  &:hover {
+    background-color: #fff;
+  }
+  border-style: solid;
+  border-color: #87ceeb;
+  border-width: 2px;
+}
+
+.black_key {
+  background-color: #222;
+  color: #eee;
+  &:hover {
+    background-color: #333;
+  }
+}
