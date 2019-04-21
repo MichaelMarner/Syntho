@@ -27,7 +27,7 @@ export class FrequencyMap {
    * @param {Number} octave the octave offset. For example, Middle C is Octave 5
    * @param {Number} note The note, a number between 0 and 12, starting with C.
    */
-  getNoteIndex(octave: number, note: number) {
+  getNoteIndex(octave: number, note: number): number {
     if (note >= 0 && note <= 12) {
       return octave * 12 + note;
     }
@@ -40,14 +40,14 @@ export class FrequencyMap {
    *
    * @param {number} note A note index between 0 and 127
    */
-  getFrequency(note: number) {
+  getFrequency(note: number): number {
     if (note >= 0 && note < 128) {
       return this.frequencies[note];
     }
     return 0;
   }
 
-  generateOctave(startingNote: number) {
+  generateOctave(startingNote: number): Array<number> {
     let octave = [];
     for (let i = startingNote; i <= startingNote + 12; i++) octave.push(this.calculateFrequency(i));
     return octave;
@@ -58,7 +58,7 @@ export class FrequencyMap {
    * You should use getFrequency instead.
    * @private
    */
-  calculateFrequency(note: number) {
+  calculateFrequency(note: number): number {
     const twelveRoot2 = 1.0594630943592952645;
     const a = 440;
     let relativeNote = note - 69;
