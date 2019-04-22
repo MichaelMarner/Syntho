@@ -9,8 +9,18 @@ import {
   ToggleButton
 } from 'react-bootstrap';
 import Knob from 'react-canvas-knob';
+import { Lfo } from '../audio/lfo';
+import { Lpf } from '../audio/lpf';
 
-export class Filter extends Component {
+export interface FilterComponentProps {
+  filter: Lpf;
+}
+
+export class FilterComponent extends Component<FilterComponentProps, any> {
+  constructor(props: FilterComponentProps) {
+    super(props);
+  }
+
   render() {
     return (
       <Card>
@@ -19,15 +29,19 @@ export class Filter extends Component {
           <ToggleButtonGroup
             name="filterMod"
             type="radio"
-            value="fixed"
+            value={this.props.filter.mode}
             className="float-right"
             size="sm"
+            onChange={value => {
+              this.props.filter.mode = value;
+              this.forceUpdate();
+            }}
           >
             <ToggleButton value="fixed" variant="outline-secondary">
               fixed
             </ToggleButton>
             <ToggleButton value="adsr" variant="outline-secondary">
-              adsr
+              eg
             </ToggleButton>
             <ToggleButton value="lfo" variant="outline-secondary">
               lfo
@@ -39,12 +53,16 @@ export class Filter extends Component {
             <Col className="text-center">
               <Knob
                 max={12000}
-                value={12000}
+                value={this.props.filter.cutOff}
                 min={0}
                 angleOffset={-125}
                 angleArc={250}
                 width={80}
                 height={80}
+                onChange={value => {
+                  this.props.filter.cutOff = value;
+                  this.forceUpdate();
+                }}
               />
               <p>Cutoff</p>
             </Col>
@@ -52,11 +70,15 @@ export class Filter extends Component {
               <Knob
                 min={0}
                 max={50}
-                value={0}
+                value={this.props.filter.peak}
                 angleOffset={-125}
                 angleArc={250}
                 width={80}
                 height={80}
+                onChange={value => {
+                  this.props.filter.peak = value;
+                  this.forceUpdate();
+                }}
               />
               <p>Peak</p>
             </Col>

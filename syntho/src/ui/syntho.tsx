@@ -1,38 +1,52 @@
 import React, { Component } from 'react';
-import { Row, Col, Alert, Card, Container } from 'react-bootstrap';
+import { Row, Col, Card, Container } from 'react-bootstrap';
 import { VcoComponent } from './vco';
-import { Filter } from './filter';
+import { FilterComponent } from './filter';
 import { LfoComponent } from './lfo';
-import { Adsr } from './adsr';
+import { AdsrComponent } from './adsr';
 import { Keyboard } from './keyboard';
 import { SynthoEngine } from '../audio/engine';
 import { FrequencyMap } from '../audio/frequency-map';
+import { PhysicalKeyboard } from './physical-keyboard';
 
 interface SynthUIProps {
   engine: SynthoEngine;
   frequencyMap: FrequencyMap;
 }
+
 export class SynthUI extends Component<SynthUIProps, any> {
+  physicalKeyboard: PhysicalKeyboard;
+
   constructor(props: SynthUIProps) {
     super(props);
+    this.physicalKeyboard = new PhysicalKeyboard({
+      keyEvent: note => this.changeNote(note),
+      triggerEvent: val => this.trigger(val)
+    });
+  }
+
+  trigger(val: number) {
+    this.props.engine.trigger(val);
+  }
+
+  changeNote(note: number) {
+    this.props.engine.vco1.frequency = this.props.frequencyMap.getFrequency(
+      this.props.frequencyMap.getNoteIndex(this.props.engine.vco1.octave, note)
+    );
+    this.props.engine.vco2.frequency = this.props.frequencyMap.getFrequency(
+      this.props.frequencyMap.getNoteIndex(this.props.engine.vco2.octave, note)
+    );
+    this.props.engine.vco3.frequency = this.props.frequencyMap.getFrequency(
+      this.props.frequencyMap.getNoteIndex(this.props.engine.vco3.octave, note)
+    );
   }
 
   keyDown(note: number) {
-    if (note >= 0) {
-      this.props.engine.vco1.frequency = this.props.frequencyMap.getFrequency(
-        this.props.frequencyMap.getNoteIndex(this.props.engine.vco1.octave, note)
-      );
-      this.props.engine.vco2.frequency = this.props.frequencyMap.getFrequency(
-        this.props.frequencyMap.getNoteIndex(this.props.engine.vco2.octave, note)
-      );
-      this.props.engine.vco3.frequency = this.props.frequencyMap.getFrequency(
-        this.props.frequencyMap.getNoteIndex(this.props.engine.vco3.octave, note)
-      );
-      this.props.engine.trigger(1);
-    }
+    this.changeNote(note);
+    this.trigger(1);
   }
   keyUp(id: number) {
-    this.props.engine.trigger(0);
+    this.trigger(0);
   }
 
   render() {
@@ -62,7 +76,7 @@ export class SynthUI extends Component<SynthUIProps, any> {
           <Col className="d-flex flex-column justify-content-between">
             <Row>
               <Col md={6}>
-                <Filter />
+                <FilterComponent filter={this.props.engine.lpf} />
               </Col>
               <Col md={6}>
                 <LfoComponent lfo={this.props.engine.lfo} />
@@ -70,7 +84,7 @@ export class SynthUI extends Component<SynthUIProps, any> {
             </Row>
             <Row>
               <Col md={12}>
-                <Adsr />
+                <AdsrComponent adsr={this.props.engine.adsr} />
               </Col>
             </Row>
           </Col>

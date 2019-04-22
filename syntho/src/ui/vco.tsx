@@ -26,7 +26,7 @@ export class VcoComponent extends Component<VcoComponentProps, any> {
             className="float-right"
             size="sm"
             onClick={() => {
-              this.props.vco.lfoMod = this.props.vco.lfoMod;
+              this.props.vco.lfoMod = !this.props.vco.lfoMod;
               this.forceUpdate();
             }}
           >

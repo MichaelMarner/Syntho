@@ -1,4 +1,4 @@
-export class LPF {
+export class Lpf {
   private filter: BiquadFilterNode;
   private _cutOff: number;
   private mod: GainNode;
@@ -20,6 +20,13 @@ export class LPF {
 
   get cutOff() {
     return this._cutOff;
+  }
+
+  get peak() {
+    return this.filter.Q.value;
+  }
+  set peak(value: number) {
+    this.filter.Q.value = value;
   }
 
   get frequency(): AudioParam {

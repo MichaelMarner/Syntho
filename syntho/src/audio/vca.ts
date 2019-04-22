@@ -1,4 +1,4 @@
-export class VCA {
+export class Vca {
   private amp: GainNode;
   mode: 'gate' | 'adsr' = 'gate';
 
@@ -13,6 +13,6 @@ export class VCA {
   }
   constructor(private context: AudioContext) {
     this.amp = context.createGain();
-    this.amp.gain.value = 0;
+    this.amp.gain.value = 0.0;
   }
 }
