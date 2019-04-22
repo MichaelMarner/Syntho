@@ -1,4 +1,4 @@
-export class VCO {
+export class Vco {
   oscillator: OscillatorNode;
   octave: number = 3;
   amp: GainNode;

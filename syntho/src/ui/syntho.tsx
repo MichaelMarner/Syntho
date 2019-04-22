@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Alert, Card, Container } from 'react-bootstrap';
-import { VCO } from './vco';
+import { VcoComponent } from './vco';
 import { Filter } from './filter';
 import { Lfo } from './lfo';
 import { Adsr } from './adsr';
@@ -23,10 +23,10 @@ export class SynthUI extends Component<SynthUIProps, any> {
         this.props.frequencyMap.getNoteIndex(this.props.engine.vco1.octave, note)
       );
       this.props.engine.vco2.frequency = this.props.frequencyMap.getFrequency(
-        this.props.frequencyMap.getNoteIndex(this.props.engine.vco1.octave, note)
+        this.props.frequencyMap.getNoteIndex(this.props.engine.vco2.octave, note)
       );
       this.props.engine.vco3.frequency = this.props.frequencyMap.getFrequency(
-        this.props.frequencyMap.getNoteIndex(this.props.engine.vco1.octave, note)
+        this.props.frequencyMap.getNoteIndex(this.props.engine.vco3.octave, note)
       );
       this.props.engine.trigger(1);
     }
@@ -51,13 +51,13 @@ export class SynthUI extends Component<SynthUIProps, any> {
         </Row>
         <Row>
           <Col md={2}>
-            <VCO />
+            <VcoComponent vco={this.props.engine.vco1} />
           </Col>
           <Col md={2}>
-            <VCO />
+            <VcoComponent vco={this.props.engine.vco2} />
           </Col>
           <Col md={2}>
-            <VCO />
+            <VcoComponent vco={this.props.engine.vco3} />
           </Col>
           <Col className="d-flex flex-column justify-content-between">
             <Row>

@@ -3,15 +3,15 @@
 //  by Michael Marner <michaelthis.20papercups.net>
 //
 
-import { VCO } from './vco';
+import { Vco } from './vco';
 import { LPF } from './lpf';
 import { LFO } from './lfo';
 import { VCA } from './vca';
 
 export class SynthoEngine {
-  vco1: VCO;
-  vco2: VCO;
-  vco3: VCO;
+  vco1: Vco;
+  vco2: Vco;
+  vco3: Vco;
 
   vca: VCA;
 
@@ -24,9 +24,9 @@ export class SynthoEngine {
   release: number;
 
   constructor(private context: AudioContext) {
-    this.vco1 = new VCO(context);
-    this.vco2 = new VCO(context);
-    this.vco3 = new VCO(context);
+    this.vco1 = new Vco(context);
+    this.vco2 = new Vco(context);
+    this.vco3 = new Vco(context);
 
     this.vca = new VCA(context);
 

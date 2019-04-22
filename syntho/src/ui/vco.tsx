@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button, Card, Col, Row } from 'react-bootstrap';
+import {
+  ButtonGroup,
+  Button,
+  Card,
+  Col,
+  Row,
+  ToggleButtonGroup,
+  ToggleButton
+} from 'react-bootstrap';
 import Knob from 'react-canvas-knob';
+import { Vco } from '../audio/vco';
 
-export class VCO extends Component {
+export interface VcoComponentProps {
+  vco: Vco;
+}
+export class VcoComponent extends Component<VcoComponentProps, any> {
   render() {
     return (
       <Card className="text-center">
@@ -10,40 +22,67 @@ export class VCO extends Component {
         <Card.Body>
           <Col>
             <Row className="justify-content-center mb-3">
-              <ButtonGroup size="sm">
-                <Button variant="secondary">saw</Button>
-                <Button variant="secondary">sq</Button>
-                <Button variant="secondary">tri</Button>
-              </ButtonGroup>
+              <ToggleButtonGroup
+                onChange={value => {
+                  this.props.vco.type = value;
+                  this.forceUpdate();
+                }}
+                type="radio"
+                name="waveform"
+                value={this.props.vco.type}
+                size="sm"
+              >
+                <ToggleButton value="sawtooth" variant="secondary">
+                  saw
+                </ToggleButton>
+                <ToggleButton value="square" variant="secondary">
+                  sq
+                </ToggleButton>
+                <ToggleButton value="triangle" variant="secondary">
+                  tri
+                </ToggleButton>
+              </ToggleButtonGroup>
             </Row>
             <Knob
               min={1}
               max={7}
-              value={3}
+              value={this.props.vco.octave}
               angleOffset={-125}
               angleArc={250}
               width={80}
               height={80}
+              onChange={value => {
+                this.props.vco.octave = value;
+                this.forceUpdate();
+              }}
             />
             <p>Octave</p>
             <Knob
               min={-500}
               max={500}
-              value={0}
+              value={this.props.vco.detune}
               angleOffset={-125}
               angleArc={250}
               width={80}
               height={80}
+              onChange={value => {
+                this.props.vco.detune = value;
+                this.forceUpdate();
+              }}
             />
             <p>Detune</p>
             <Knob
               min={0}
               max={100}
-              value={100}
+              value={Math.round(this.props.vco.gain * 100)}
               angleOffset={-125}
               angleArc={250}
               width={80}
               height={80}
+              onChange={value => {
+                this.props.vco.gain = value / 100;
+                this.forceUpdate();
+              }}
             />
             <p>Volume</p>
           </Col>
