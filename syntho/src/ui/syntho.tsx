@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Alert, Card, Container } from 'react-bootstrap';
 import { VcoComponent } from './vco';
 import { Filter } from './filter';
-import { Lfo } from './lfo';
+import { LfoComponent } from './lfo';
 import { Adsr } from './adsr';
 import { Keyboard } from './keyboard';
 import { SynthoEngine } from '../audio/engine';
@@ -65,7 +65,7 @@ export class SynthUI extends Component<SynthUIProps, any> {
                 <Filter />
               </Col>
               <Col md={6}>
-                <Lfo />
+                <LfoComponent lfo={this.props.engine.lfo} />
               </Col>
             </Row>
             <Row>

@@ -1,8 +1,12 @@
 export class Vco {
-  oscillator: OscillatorNode;
+  private oscillator: OscillatorNode;
   octave: number = 3;
-  amp: GainNode;
-  lfoHookup: GainNode;
+  private amp: GainNode;
+  private mod: GainNode;
+
+  get modIn(): GainNode {
+    return this.mod;
+  }
 
   set type(value: OscillatorType) {
     this.oscillator.type = value;
@@ -32,6 +36,22 @@ export class Vco {
     return this.amp.gain.value;
   }
 
+  set lfoMod(value: boolean) {
+    if (value) {
+      this.modIn.gain.value = 1.0;
+    } else {
+      this.modIn.gain.value = 0;
+    }
+  }
+
+  get lfoMod(): boolean {
+    return this.modIn.gain.value === 1.0;
+  }
+
+  get output(): AudioNode {
+    return this.amp;
+  }
+
   constructor(private context: AudioContext) {
     this.oscillator = this.context.createOscillator();
     this.oscillator.type = 'sawtooth';
@@ -42,9 +62,9 @@ export class Vco {
     this.amp = this.context.createGain();
     this.amp.gain.value = 1;
 
-    this.lfoHookup = this.context.createGain();
-    this.lfoHookup.gain.value = 0;
-    this.lfoHookup.connect(this.oscillator.frequency);
+    this.mod = this.context.createGain();
+    this.mod.gain.value = 0;
+    this.mod.connect(this.oscillator.frequency);
 
     this.oscillator.connect(this.amp);
   }

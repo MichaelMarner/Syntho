@@ -18,7 +18,21 @@ export class VcoComponent extends Component<VcoComponentProps, any> {
   render() {
     return (
       <Card className="text-center">
-        <Card.Header>VCO</Card.Header>
+        <Card.Header>
+          VCO
+          <Button
+            active={this.props.vco.modIn.gain.value == 1.0}
+            variant="outline-secondary"
+            className="float-right"
+            size="sm"
+            onClick={() => {
+              this.props.vco.lfoMod = this.props.vco.lfoMod;
+              this.forceUpdate();
+            }}
+          >
+            lfo
+          </Button>
+        </Card.Header>
         <Card.Body>
           <Col>
             <Row className="justify-content-center mb-3">
@@ -32,13 +46,13 @@ export class VcoComponent extends Component<VcoComponentProps, any> {
                 value={this.props.vco.type}
                 size="sm"
               >
-                <ToggleButton value="sawtooth" variant="secondary">
+                <ToggleButton value="sawtooth" variant="outline-secondary">
                   saw
                 </ToggleButton>
-                <ToggleButton value="square" variant="secondary">
+                <ToggleButton value="square" variant="outline-secondary">
                   sq
                 </ToggleButton>
-                <ToggleButton value="triangle" variant="secondary">
+                <ToggleButton value="triangle" variant="outline-secondary">
                   tri
                 </ToggleButton>
               </ToggleButtonGroup>

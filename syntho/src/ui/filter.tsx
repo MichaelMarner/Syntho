@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Card, ButtonGroup, Button, Row, Col } from 'react-bootstrap';
+import {
+  Card,
+  ButtonGroup,
+  Button,
+  Row,
+  Col,
+  ToggleButtonGroup,
+  ToggleButton
+} from 'react-bootstrap';
 import Knob from 'react-canvas-knob';
 
 export class Filter extends Component {
@@ -8,11 +16,23 @@ export class Filter extends Component {
       <Card>
         <Card.Header>
           Filter
-          <ButtonGroup className="float-right" size="sm">
-            <Button variant="outline-secondary">fixed</Button>
-            <Button variant="outline-secondary">adsr</Button>
-            <Button variant="outline-secondary">lfo</Button>
-          </ButtonGroup>
+          <ToggleButtonGroup
+            name="filterMod"
+            type="radio"
+            value="fixed"
+            className="float-right"
+            size="sm"
+          >
+            <ToggleButton value="fixed" variant="outline-secondary">
+              fixed
+            </ToggleButton>
+            <ToggleButton value="adsr" variant="outline-secondary">
+              adsr
+            </ToggleButton>
+            <ToggleButton value="lfo" variant="outline-secondary">
+              lfo
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Card.Header>
         <Card.Body>
           <Row>

@@ -1,31 +1,46 @@
 export class LPF {
-  filter: BiquadFilterNode;
-  frequencySetting: number;
-  lfoHookup: GainNode;
-  mod: 'fixed' | 'adsr' | 'lfo' = 'fixed';
+  private filter: BiquadFilterNode;
+  private _cutOff: number;
+  private mod: GainNode;
+  mode: 'fixed' | 'adsr' | 'lfo' = 'fixed';
+
+  get modIn(): GainNode {
+    return this.mod;
+  }
 
   reset() {
     this.filter.frequency.cancelScheduledValues(this.context.currentTime);
-    this.filter.frequency.setValueAtTime(this.frequencySetting, this.context.currentTime);
+    this.filter.frequency.setValueAtTime(this._cutOff, this.context.currentTime);
   }
 
-  set frequency(value: number) {
+  set cutOff(value: number) {
     this.filter.frequency.setValueAtTime(value, this.context.currentTime);
-    this.frequencySetting = value;
+    this._cutOff = value;
   }
 
-  get frequency() {
-    return this.frequencySetting;
+  get cutOff() {
+    return this._cutOff;
+  }
+
+  get frequency(): AudioParam {
+    return this.filter.frequency;
+  }
+
+  get input(): AudioNode {
+    return this.filter;
+  }
+  get output(): AudioNode {
+    return this.filter;
   }
 
   constructor(private context: AudioContext) {
     this.filter = this.context.createBiquadFilter();
     this.filter.type = 'lowpass';
     this.filter.frequency.value = 12000;
-    this.frequencySetting = 12000;
+    this._cutOff = 12000;
     this.filter.Q.value = 0;
-    this.lfoHookup = this.context.createGain();
-    this.lfoHookup.gain.value = 0;
-    this.lfoHookup.connect(this.filter.frequency);
+    this.mod = this.context.createGain();
+    this.mod.gain.value = 0;
+    this.mod.connect(this.filter.frequency);
   }
 }
