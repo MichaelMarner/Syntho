@@ -25,17 +25,17 @@
   margin: 1px;
 }
 
-.white_key {
+.white-key {
   background-color: #eee;
   &:hover {
     background-color: #fff;
   }
   border-style: solid;
-  border-color: #87ceeb;
+  border-color: #cccccc;
   border-width: 2px;
 }
 
-.black_key {
+.black-key {
   background-color: #222;
   color: #eee;
   &:hover {

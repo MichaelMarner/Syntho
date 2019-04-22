@@ -1,10 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { SynthoEngine } from './audio/engine';
+import { ErrorMessage } from './ui/error';
+import { SynthUI } from './ui/syntho';
+import { FrequencyMap } from './audio/frequency-map';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+try {
+  const audioContext: AudioContext = new (window.AudioContext ||
+    (window as any).webkitAudioContext)();
+  const engine = new SynthoEngine(audioContext);
+
+  const frequencyMap = new FrequencyMap();
+  ReactDOM.render(
+    <SynthUI engine={engine} frequencyMap={frequencyMap} />,
+    document.getElementById('root')
+  );
+} catch (err) {
+  ReactDOM.render(<ErrorMessage />, document.getElementById('root'));
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

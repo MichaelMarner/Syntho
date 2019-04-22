@@ -6,16 +6,9 @@
 import { VCO } from './vco';
 import { LPF } from './lpf';
 import { LFO } from './lfo';
+import { VCA } from './vca';
 
-class VCA {
-  amp: GainNode;
-  mode: 'gate' | 'adsr' = 'gate';
-
-  constructor(private context: AudioContext) {
-    this.amp = context.createGain();
-  }
-}
-export class Syntho {
+export class SynthoEngine {
   vco1: VCO;
   vco2: VCO;
   vco3: VCO;
@@ -62,6 +55,9 @@ export class Syntho {
 
   trigger(value: number) {
     if (value == 1) {
+      if (this.context.state == 'suspended') {
+        this.context.resume();
+      }
       if (this.vca.mode == 'adsr') {
         this.vca.amp.gain.cancelScheduledValues(this.context.currentTime);
         this.vca.amp.gain.setValueAtTime(0, this.context.currentTime);

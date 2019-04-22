@@ -12,7 +12,7 @@ export class VCO {
   }
 
   set frequency(value: number) {
-    this.oscillator.frequency.value = value;
+    this.oscillator.frequency.setValueAtTime(value, this.context.currentTime);
   }
   get frequency() {
     return this.oscillator.frequency.value;
