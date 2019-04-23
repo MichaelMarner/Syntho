@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  font-size: 12px;
+}
+
+.btn-sm {
+  font-size: 12px;
+}
+
+.btn-group-sm .btn {
+  font-size: 12px;
+}
