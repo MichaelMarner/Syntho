@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
-import { Card, ButtonGroup, Button, Col, Row } from 'react-bootstrap';
+import {
+  Card,
+  ButtonGroup,
+  Button,
+  Col,
+  Row,
+  ToggleButtonGroup,
+  ToggleButton
+} from 'react-bootstrap';
 import Knob from 'react-canvas-knob';
 import { Adsr } from '../audio/adsr';
+import { Vca } from '../audio/vca';
+import { ModType } from '../audio/engine';
 
 export interface AdsrComponentProps {
   adsr: Adsr;
+  vca: Vca;
+  patchVca: Function;
 }
 
 export class AdsrComponent extends Component<AdsrComponentProps, any> {
@@ -15,10 +27,24 @@ export class AdsrComponent extends Component<AdsrComponentProps, any> {
           EG
           <div className="float-right">
             AMP:
-            <ButtonGroup className="ml-2" size="sm">
-              <Button variant="outline-secondary">gate</Button>
-              <Button variant="outline-secondary">eg</Button>
-            </ButtonGroup>
+            <ToggleButtonGroup
+              name="amp setting"
+              type="radio"
+              value={this.props.vca.patch}
+              className="ml-2"
+              size="sm"
+              onChange={value => {
+                this.props.patchVca(value);
+                this.forceUpdate();
+              }}
+            >
+              <ToggleButton value={ModType.gate} variant="outline-secondary">
+                gate
+              </ToggleButton>
+              <ToggleButton value={ModType.eg} variant="outline-secondary">
+                eg
+              </ToggleButton>
+            </ToggleButtonGroup>
           </div>
         </Card.Header>
         <Card.Body>

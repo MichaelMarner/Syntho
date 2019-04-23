@@ -15,7 +15,7 @@ import { ModType } from '../audio/engine';
 
 export interface FilterComponentProps {
   filter: Lpf;
-  filterPatch: Function;
+  patchFilter: Function;
 }
 
 export class FilterComponent extends Component<FilterComponentProps, any> {
@@ -35,7 +35,7 @@ export class FilterComponent extends Component<FilterComponentProps, any> {
             className="float-right"
             size="sm"
             onChange={value => {
-              this.props.filterPatch(value);
+              this.props.patchFilter(value);
               this.forceUpdate();
             }}
           >

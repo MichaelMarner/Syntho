@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, Container } from 'react-bootstrap';
 import { VcoComponent } from './vco';
-import { FilterComponent } from './filter';
-import { LfoComponent } from './lfo';
-import { AdsrComponent } from './adsr';
-import { Keyboard } from './keyboard';
+import { FilterComponent } from './filter.component';
+import { LfoComponent } from './lfo.component';
+import { AdsrComponent } from './adsr.component';
+import { Keyboard } from './keyboard.component';
 import { SynthoEngine } from '../audio/engine';
 import { FrequencyMap } from '../audio/frequency-map';
 import { PhysicalKeyboard } from './physical-keyboard';
@@ -78,7 +78,7 @@ export class SynthUI extends Component<SynthUIProps, any> {
               <Col md={6}>
                 <FilterComponent
                   filter={this.props.engine.lpf}
-                  filterPatch={value => this.props.engine.patchFilter(value)}
+                  patchFilter={value => this.props.engine.patchFilter(value)}
                 />
               </Col>
               <Col md={6}>
@@ -87,7 +87,11 @@ export class SynthUI extends Component<SynthUIProps, any> {
             </Row>
             <Row>
               <Col md={12}>
-                <AdsrComponent adsr={this.props.engine.adsr} />
+                <AdsrComponent
+                  adsr={this.props.engine.adsr}
+                  vca={this.props.engine.vca}
+                  patchVca={value => this.props.engine.patchVca(value)}
+                />
               </Col>
             </Row>
           </Col>

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { SynthoEngine } from './audio/engine';
-import { ErrorMessage } from './ui/error';
-import { SynthUI } from './ui/syntho';
+import { ErrorMessage } from './ui/error.component';
+import { SynthUI } from './ui/synth-ui';
 import { FrequencyMap } from './audio/frequency-map';
 
 try {

@@ -23,7 +23,6 @@ export class SynthoEngine {
   vco3: Vco;
 
   vca: Vca;
-  vcaPatch: ModType = ModType.gate;
 
   lpf: Lpf;
   lfo: Lfo;
@@ -59,8 +58,8 @@ export class SynthoEngine {
     this.gate.output.connect(this.vca.gain);
   }
 
-  patchAmp(to: ModType) {
-    if (to === this.vcaPatch) {
+  patchVca(to: ModType) {
+    if (to === this.vca.patch) {
       return;
     }
     if (to === ModType.gate) {
@@ -70,7 +69,7 @@ export class SynthoEngine {
       this.gate.output.disconnect(this.vca.gain);
       this.adsr.output.connect(this.vca.gain);
     }
-    this.vcaPatch = to;
+    this.vca.patch = to;
   }
   patchFilter(to: ModType) {
     if (to === this.lpf.patch) {
