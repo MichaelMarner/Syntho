@@ -47,21 +47,19 @@ export class FrequencyMap {
     return 0;
   }
 
-  generateOctave(startingNote: number): Array<number> {
-    let octave: Array<number> = [];
-    for (let i = startingNote; i <= startingNote + 12; i++) octave.push(this.calculateFrequency(i));
-    return octave;
-  }
-
   /**
    * Calculates a frequency for a given note.
+   *
+   * https://en.wikipedia.org/wiki/Twelfth_root_of_two
+   *
    * You should use getFrequency instead.
    * @private
    */
   calculateFrequency(note: number): number {
     const twelveRoot2 = 1.0594630943592952645;
-    const a = 440;
-    let relativeNote = note - 69;
-    return a * Math.pow(twelveRoot2, relativeNote);
+    const a440 = 440;
+    const midiA4 = 69;
+    let relativeNote = note - midiA4;
+    return a440 * Math.pow(twelveRoot2, relativeNote);
   }
 }
