@@ -11,9 +11,11 @@ import {
 import Knob from 'react-canvas-knob';
 import { Lfo } from '../audio/lfo';
 import { Lpf } from '../audio/lpf';
+import { ModType } from '../audio/engine';
 
 export interface FilterComponentProps {
   filter: Lpf;
+  filterPatch: Function;
 }
 
 export class FilterComponent extends Component<FilterComponentProps, any> {
@@ -29,21 +31,21 @@ export class FilterComponent extends Component<FilterComponentProps, any> {
           <ToggleButtonGroup
             name="filterMod"
             type="radio"
-            value={this.props.filter.mode}
+            value={this.props.filter.patch}
             className="float-right"
             size="sm"
             onChange={value => {
-              this.props.filter.mode = value;
+              this.props.filterPatch(value);
               this.forceUpdate();
             }}
           >
-            <ToggleButton value="fixed" variant="outline-secondary">
+            <ToggleButton value={ModType.none} variant="outline-secondary">
               fixed
             </ToggleButton>
-            <ToggleButton value="adsr" variant="outline-secondary">
+            <ToggleButton value={ModType.eg} variant="outline-secondary">
               eg
             </ToggleButton>
-            <ToggleButton value="lfo" variant="outline-secondary">
+            <ToggleButton value={ModType.lfo} variant="outline-secondary">
               lfo
             </ToggleButton>
           </ToggleButtonGroup>
@@ -55,6 +57,7 @@ export class FilterComponent extends Component<FilterComponentProps, any> {
                 max={12000}
                 value={this.props.filter.cutOff}
                 min={0}
+                step={0.1}
                 angleOffset={-125}
                 angleArc={250}
                 width={80}

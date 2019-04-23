@@ -76,7 +76,10 @@ export class SynthUI extends Component<SynthUIProps, any> {
           <Col className="d-flex flex-column justify-content-between">
             <Row>
               <Col md={6}>
-                <FilterComponent filter={this.props.engine.lpf} />
+                <FilterComponent
+                  filter={this.props.engine.lpf}
+                  filterPatch={value => this.props.engine.patchFilter(value)}
+                />
               </Col>
               <Col md={6}>
                 <LfoComponent lfo={this.props.engine.lfo} />

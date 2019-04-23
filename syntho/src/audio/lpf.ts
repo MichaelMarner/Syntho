@@ -1,25 +1,21 @@
+import { ModType } from './engine';
+
 export class Lpf {
   private filter: BiquadFilterNode;
-  private _cutOff: number;
-  private mod: GainNode;
-  mode: 'fixed' | 'adsr' | 'lfo' = 'fixed';
+  private _cutOff: ConstantSourceNode;
+  public mod: GainNode;
+  patch: ModType = ModType.none;
 
   get modIn(): GainNode {
     return this.mod;
   }
 
-  reset() {
-    this.filter.frequency.cancelScheduledValues(this.context.currentTime);
-    this.filter.frequency.setValueAtTime(this._cutOff, this.context.currentTime);
-  }
-
   set cutOff(value: number) {
-    this.filter.frequency.setValueAtTime(value, this.context.currentTime);
-    this._cutOff = value;
+    this._cutOff.offset.setValueAtTime(value, this.context.currentTime);
   }
 
   get cutOff() {
-    return this._cutOff;
+    return this._cutOff.offset.value;
   }
 
   get peak() {
@@ -42,12 +38,15 @@ export class Lpf {
 
   constructor(private context: AudioContext) {
     this.filter = this.context.createBiquadFilter();
+    this._cutOff = this.context.createConstantSource();
+    this._cutOff.start();
     this.filter.type = 'lowpass';
-    this.filter.frequency.value = 12000;
-    this._cutOff = 12000;
+    this._cutOff.offset.value = 12000;
     this.filter.Q.value = 0;
+    this.filter.frequency.value = 0;
     this.mod = this.context.createGain();
-    this.mod.gain.value = 0;
+    this.mod.gain.value = 1;
+    this._cutOff.connect(this.mod);
     this.mod.connect(this.filter.frequency);
   }
 }

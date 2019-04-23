@@ -1,6 +1,8 @@
+import { ModType } from './engine';
+
 export class Vca {
   private amp: GainNode;
-  mode: 'gate' | 'adsr' = 'gate';
+  patch: ModType = ModType.gate;
 
   get gain(): AudioParam {
     return this.amp.gain;
